@@ -3,7 +3,7 @@ package com.momolela.exception;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-class ExceptionDealDemo {
+class Exception02DealDemo {
     int div(int a, int b) throws Exception{
         return a / b;
     }
@@ -14,11 +14,11 @@ class ExceptionDealDemo {
  * 1、try catch
  * 2、声明抛出
  */
-public class ExceptionDeal {
+public class Exception02Deal {
     public static void main(String[] args) throws Exception {
-        ExceptionDealDemo exceptionDealDemo = new ExceptionDealDemo();
+        Exception02DealDemo exception02DealDemo = new Exception02DealDemo();
 //        try {
-            int div = exceptionDealDemo.div(4, 0); // 会抛出异常：Exception in thread "main" java.lang.ArithmeticException: / by zero
+            int div = exception02DealDemo.div(4, 0); // 会抛出异常：Exception in thread "main" java.lang.ArithmeticException: / by zero
             System.out.println("结果是：" + div);
 //        } catch (Exception e) {
 //

@@ -35,7 +35,7 @@ class FushuRuntimeException extends RuntimeException {
     }
 }
 
-class ExceptionRuntimeDemo {
+class Exception04RuntimeDemo {
     int div(int a, int b) {
         if (b < 0)
             throw new FushuRuntimeException("出现了除数为负数的情况 /by fushu"); // 手动通过关键字throw抛出一个自定义的运行时异常，因为是运行时异常，方法上不用声明，也不需要调用者处理
@@ -43,11 +43,11 @@ class ExceptionRuntimeDemo {
     }
 }
 
-public class ExceptionRuntime {
+public class Exception04Runtime {
     public static void main(String[] args) {
-        ExceptionRuntimeDemo exceptionRuntimeDemo = new ExceptionRuntimeDemo();
+        Exception04RuntimeDemo exception04RuntimeDemo = new Exception04RuntimeDemo();
         try {
-            int div = exceptionRuntimeDemo.div(4, -1);
+            int div = exception04RuntimeDemo.div(4, -1);
             System.out.println("结果是：" + div);
         } catch (Exception e) {
             System.out.println("自定义异常对象是：" + e.toString());

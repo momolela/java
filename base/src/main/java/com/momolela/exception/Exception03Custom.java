@@ -35,7 +35,7 @@ class FushuException extends Exception {
     }
 }
 
-class ExceptionCustomDemo {
+class Exception03CustomDemo {
     int div(int a, int b) throws FushuException {
         if (b < 0)
             throw new FushuException("出现了除数为负数的情况 /by fushu", b); // 手动通过关键字throw抛出一个自定义的异常，一个异常的抛出需要处理，还是要么try catch要么throws
@@ -43,11 +43,11 @@ class ExceptionCustomDemo {
     }
 }
 
-public class ExceptionCustom {
+public class Exception03Custom {
     public static void main(String[] args) {
-        ExceptionCustomDemo exceptionCustomDemo = new ExceptionCustomDemo();
+        Exception03CustomDemo exception03CustomDemo = new Exception03CustomDemo();
         try {
-            int div = exceptionCustomDemo.div(4, -1);
+            int div = exception03CustomDemo.div(4, -1);
             System.out.println("结果是：" + div);
         } catch (FushuException e) {
             System.out.println("自定义异常对象是：" + e.toString());
