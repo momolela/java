@@ -1,6 +1,6 @@
 package com.momolela.exception;
 
-class ExceptionBaseDemo {
+class Exception01BaseDemo {
     int div(int a, int b) {
         return a / b;
     }
@@ -15,11 +15,11 @@ class ExceptionBaseDemo {
  *  |----- Error 严重问题，一般不编写针对性的代码对其进行处理
  *  |----- Exception 非严重问题，可以使用针对性的代码对其进行处理
  */
-public class ExceptionBase {
+public class Exception01Base {
 
     public static void main(String[] args) {
-        ExceptionBaseDemo exceptionBaseDemo = new ExceptionBaseDemo();
-        int div = exceptionBaseDemo.div(4, 0); // 会抛出异常：Exception in thread "main" java.lang.ArithmeticException: / by zero
+        Exception01BaseDemo exception01BaseDemo = new Exception01BaseDemo();
+        int div = exception01BaseDemo.div(4, 0); // 会抛出异常：Exception in thread "main" java.lang.ArithmeticException: / by zero
         System.out.println("结果是：" + div);
         System.out.println("over");
     }

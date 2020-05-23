@@ -3,7 +3,7 @@ package com.momolela.exception;
 /**
  * 声明异常时，建议声明具体的异常
  */
-class ExceptionsDealDemo {
+class Exception02ManyDealDemo {
     int div(int a, int b) throws ArithmeticException, IndexOutOfBoundsException {
         int[] arr = new int[a];
         System.out.println(arr[4]);
@@ -16,11 +16,11 @@ class ExceptionsDealDemo {
  * 如果catch块的异常出现了继承关系，父类的异常catch放在最下面
  * 不要定义多余的catch块
  */
-public class ExceptionsDeal {
+public class Exception02ManyDeal {
     public static void main(String[] args) {
-        ExceptionsDealDemo exceptionsDealDemo = new ExceptionsDealDemo();
+        Exception02ManyDealDemo exception02ManyDealDemo = new Exception02ManyDealDemo();
         try {
-            int div = exceptionsDealDemo.div(4, 1);
+            int div = exception02ManyDealDemo.div(4, 1);
             System.out.println("结果是：" + div);
         } catch (ArithmeticException ae) {
             System.out.println(ae.toString());
