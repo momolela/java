@@ -11,6 +11,9 @@ public class AddGitKeep {
         if (!file.isDirectory()) {
             return;
         }
+        if (file.isDirectory() && ".git".equals(file.getName())) {
+            return;
+        }
         File[] fileList = file.listFiles();
         if (fileList.length > 0) {
             for (File temp : fileList) {
@@ -23,7 +26,6 @@ public class AddGitKeep {
         }
 
     }
-
 
     public static void addGit(File file) {
         File gitKeepFile = new File(file.getAbsolutePath() + File.separator + ".gitkeep");
