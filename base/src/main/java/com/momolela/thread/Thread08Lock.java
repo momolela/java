@@ -91,7 +91,7 @@ class ConsumerLock implements Runnable {
 
 /**
  * Object中的wait，notify，notifyAll方法，都交给了Condition对象，Condition对象通过lock获得。
- * Condition可以有多个，相对于synchronized，需要一个锁就要加一个synchronized，会形成锁嵌套，造成死锁。
+ * Condition锁对象可以有多个，避免了同步嵌套同步；相对于synchronized，需要一个锁对象就要加一个synchronized，会形成同步嵌套同步，造成死锁。
  */
 public class Thread08Lock {
 
