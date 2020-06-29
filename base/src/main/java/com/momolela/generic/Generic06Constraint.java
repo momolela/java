@@ -64,7 +64,7 @@ public class Generic06Constraint {
         printList4(arrayList3); // 打印里限定了下限是 Student
 
         /**
-         * 比较器接收父类，然后里面既可以比较 Student ，也可以比较 Worker
+         * 比较器可以接收父类，然后里面既可以比较 Student ，也可以比较 Worker
          *
          * 因为 TreeSet 的构造函数，传入的比较器的泛型限定是 <? super E>
          * public TreeSet(Comparator<? super E> comparator) {
@@ -86,7 +86,7 @@ public class Generic06Constraint {
         }
 
         /**
-         * 比较器接收父类，然后里面既可以比较 Student ，也可以比较 Worker
+         * 比较器可以接收父类，然后里面既可以比较 Student ，也可以比较 Worker
          *
          * 因为 TreeSet 的构造函数，传入的比较器的泛型限定是 <? super E>
          * public TreeSet(Comparator<? super E> comparator) {
