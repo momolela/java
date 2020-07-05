@@ -22,6 +22,11 @@ public class System01Base {
         }
 
         /**
+         * Properties 是 HashTable 的子类，是与流相结合的集合，下面也可以输出到控制台
+         */
+        properties.list(System.out);
+
+        /**
          * 在 jvm 启动的时候 setProperty，可以用 java -D<key>=<value> 程序字节码
          */
     }
