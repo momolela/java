@@ -12,8 +12,8 @@ import java.io.PrintWriter;
  * 1 File 对象：File
  * 2 字符串路径：String
  * 3 字节输出流：OutputStream
- * <p>
- * <p>
+ *
+ *
  * 字符打印流 PrintWriter
  * 构造函数可以接收的参数类型
  * 1 File 对象：File
@@ -22,8 +22,6 @@ import java.io.PrintWriter;
  * 4 字符输出流：Writer
  */
 public class IO14PrintWriterPrintStream {
-
-
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -42,5 +40,4 @@ public class IO14PrintWriterPrintStream {
         printWriter.close();
         bufferedReader.close();
     }
-
 }

@@ -14,7 +14,7 @@ public class IO03FileCopy {
             char[] buf = new char[1024];
             int num = 0;
             while ((num = fr.read(buf)) != -1) {
-                fw.write(buf);
+                fw.write(buf, 0, num);
             }
             System.out.println("文件复制成功");
         } catch (IOException e) {

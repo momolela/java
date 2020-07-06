@@ -8,10 +8,9 @@ public class IO10ImgCopyByBufferedStream {
         BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream("test-copy.png"));
 
         long s1 = System.currentTimeMillis();
-        byte[] buf = new byte[1024];
-        int read = 0;
-        while ((read = bufferedInputStream.read(buf)) != -1) {
-            bufferedOutputStream.write(buf);
+        int num = 0;
+        while ((num = bufferedInputStream.read()) != -1) {
+            bufferedOutputStream.write(num);
         }
         System.out.println("拷贝文件花费了：" + (System.currentTimeMillis() - s1) + " ms");
 
