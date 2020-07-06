@@ -13,7 +13,6 @@ import java.util.Vector;
 public class IO15SequenceInputStream {
 
     public static void main(String[] args) throws IOException {
-
         Vector<FileInputStream> fileInputStreams = new Vector<FileInputStream>();
         fileInputStreams.add(new FileInputStream("test.txt"));
         fileInputStreams.add(new FileInputStream("test-copy.txt"));
