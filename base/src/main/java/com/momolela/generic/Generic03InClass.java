@@ -35,7 +35,7 @@ class UtilsNow<T> {
 public class Generic03InClass {
 
     public static void main(String[] args) {
-        UtilsNow<String> utilsNow = new UtilsNow<>();
+        UtilsNow<String> utilsNow = new UtilsNow<String>();
         String tool = utilsNow.getTool();
     }
 }
