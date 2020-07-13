@@ -11,9 +11,9 @@ class ResourceLock {
     private int count = 0;
     private boolean flag = false;
 
-    private ReentrantLock lock = new ReentrantLock(); // jdk5之后用于替换synchronized的同步函数同步代码块的锁
-    private Condition condition_producer = lock.newCondition(); // 锁的对象，生产者
-    private Condition condition_consumer = lock.newCondition(); // 锁的对象，消费者
+    private ReentrantLock lock = new ReentrantLock(); // jdk5 之后用于替换 synchronized 的同步函数同步代码块的锁，锁还是同一把锁
+    private Condition condition_producer = lock.newCondition(); // 给同一把锁上的线程分类，生产者线程
+    private Condition condition_consumer = lock.newCondition(); // 给同一把锁上的线程分类，消费者线程
 
     public void set(String name) {
         lock.lock(); // 加锁
@@ -28,7 +28,7 @@ class ResourceLock {
             this.name = name + "-" + this.count++;
             System.out.println(Thread.currentThread().getName() + " ==生产者== " + this.name);
             this.flag = true;
-            condition_consumer.signal(); // 为了避免死锁，要唤醒所有的消费者线程
+            condition_consumer.signal(); // 为了避免死锁，要唤醒所有的消费者线程，指定某类线程唤醒
         } finally {
             lock.unlock(); // 一定要释放锁
         }
@@ -46,7 +46,7 @@ class ResourceLock {
             }
             System.out.println(Thread.currentThread().getName() + " ==消费者== " + this.name);
             this.flag = false;
-            condition_producer.signal(); // 为了避免死锁，要唤醒所有的生产者线程
+            condition_producer.signal(); // 为了避免死锁，要唤醒所有的生产者线程，指定某类线程唤醒
         } finally {
             lock.unlock(); // 释放锁
         }

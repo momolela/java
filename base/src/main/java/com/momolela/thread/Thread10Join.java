@@ -16,6 +16,13 @@ class Thread10JoinDemo implements Runnable {
  */
 public class Thread10Join {
     public static void main(String[] args) {
+
+//        testJoin1();
+        testJoin2();
+
+    }
+
+    private static void testJoin1() {
         Thread10JoinDemo thread10JoinDemo = new Thread10JoinDemo();
         Thread t1 = new Thread(thread10JoinDemo);
         Thread t2 = new Thread(thread10JoinDemo);
@@ -31,6 +38,41 @@ public class Thread10Join {
         } catch (InterruptedException e) {
             e.printStackTrace(); // 为了防止因为阻塞，导致线程挂了，提供了InterruptedException异常，只需要线程调用interrupt()即可
         }
+        for (int i = 0; i < 100; i++) {
+            System.out.println(Thread.currentThread().getName() + " run " + i);
+        }
+    }
+
+    private static void testJoin2() {
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    System.out.println(Thread.currentThread().getName() + " run " + i);
+                }
+            }
+        });
+        Thread t2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    System.out.println(Thread.currentThread().getName() + " run " + i);
+                }
+            }
+        });
+        t1.start();
+        t2.start();
+        try {
+            t1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            t2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // t1 和 t2 都在抢占主线程的CPU执行权，只有当 t1 和 t2 都执行完，才能执行主线程
         for (int i = 0; i < 100; i++) {
             System.out.println(Thread.currentThread().getName() + " run " + i);
         }
