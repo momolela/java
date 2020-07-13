@@ -11,7 +11,7 @@ class Thread09LockStopDemo implements Runnable {
     public synchronized void run() {
         while (flag) {
             try {
-                wait(); // 当线程处于冻结状态，就不会再执行while(flag)，就读不到标记，就结束不了
+                wait(); // 当线程处于冻结状态，就不会再执行while(flag)，就读不到标记，就结束不了，所以外部简单的调用 changeFlag() 可能无效，要使用 interrupt()
             } catch (InterruptedException e) {
                 System.out.println(Thread.currentThread().getName() + " 线程运行出现了异常，肯定执行了interrupt()");
                 this.changeFlag();
