@@ -50,5 +50,10 @@ public class Integer01 {
 
         Integer01 h = new Integer01();
         System.out.println(h.getB()); // null，Integer 的默认值是 null，int 的默认值是0
+
+
+        int a = 46;
+        double b = 46.0;
+        System.out.println(a == b);
     }
 }

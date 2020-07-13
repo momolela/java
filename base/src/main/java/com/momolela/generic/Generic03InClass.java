@@ -32,10 +32,29 @@ class UtilsNow<T> {
     }
 }
 
-public class Generic03InClass {
+/**
+ * 现在做法的扩展，类上使用泛型的限定，但是不能用 ?
+ *
+ * @param <T>
+ */
+class UtilsNowExtends<T extends String> {
+    private T tool;
 
+    public T getTool() {
+        return tool;
+    }
+
+    public void setTool(T tool) {
+        this.tool = tool;
+    }
+}
+
+public class Generic03InClass {
     public static void main(String[] args) {
         UtilsNow<String> utilsNow = new UtilsNow<String>();
         String tool = utilsNow.getTool();
+
+        UtilsNowExtends<String> utilsNowExtends = new UtilsNowExtends<>();
+        String toolExtends = utilsNowExtends.getTool();
     }
 }
