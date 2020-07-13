@@ -161,4 +161,15 @@ public class Generic06Constraint {
         }
     }
 
+    /**
+     * 泛型的限定除了使用 ? extends 和 ? super ，还可以使用 T extends 和 T super
+     */
+    private static <T extends Person> void printList5(ArrayList<T> arrayList) {
+        Iterator<T> it = arrayList.iterator();
+        while (it.hasNext()) {
+            Person next = it.next();
+            System.out.println(next.getName());
+        }
+    }
+
 }
