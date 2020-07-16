@@ -1,5 +1,7 @@
 package com.momolela.thread;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * 当多个线程要同时处理公共资源ticket，可能出现并发安全问题
  * 解决办法：对多条操作共享数据的语句，只能让一个线程都执行完，才能让其他线程执行；java提供了同步代码块
@@ -19,6 +21,7 @@ class Thread04ConcurrentProblemDemo implements Runnable {
                 if (ticket > 0) {
                     try {
                         Thread.sleep(1000); // 当这里线程睡1s的时候，多个线程都在这里即将要同时处理公共资源ticket，可能出现并发安全问题
+                        TimeUnit.SECONDS.sleep(1); // JUC 里面的线程等待，易读
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

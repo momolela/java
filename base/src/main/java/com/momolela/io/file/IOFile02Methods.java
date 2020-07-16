@@ -7,7 +7,8 @@ import java.io.IOException;
 public class IOFile02Methods {
 
     public static void main(String[] args) throws IOException {
-        // 1 创建，createNewFile 不存在就创建，返回 true，存在就不创建，返回 false；和 IO 流不一样，IO 流只要流对象一创建文件就创建，如果存在还会覆盖。
+        // 1 创建，createNewFile 不存在就创建，返回 true，存在就不创建，返回 false；
+        // 和 IO 流不一样，IO 流只要流对象一创建文件就创建，如果存在还会覆盖。
         File f1 = new File("test-file-create.txt");
         boolean newFile = f1.createNewFile();
         System.out.println("文件创建是否成功：" + newFile);
