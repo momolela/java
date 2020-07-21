@@ -12,6 +12,8 @@ public class Net06TCPServer {
     }
 
     private static void TCPSocketRead() throws IOException {
+//        ServerSocket serverSocket = new ServerSocket(10001, 3); // 指定只能建立3个连接，backlog
+
         ServerSocket serverSocket = new ServerSocket(10001);
         Socket socket = serverSocket.accept();// 阻塞，没有数据就等，如果有数据，会使用对应的客户端对象，利用该对象的读取流读取数据
         InputStream inputStream = socket.getInputStream();

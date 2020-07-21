@@ -11,6 +11,9 @@ public class Net05TCPClient {
     }
 
     private static void TCPSocketWrite() throws IOException {
+//        Socket socket = new Socket();
+//        socket.connect(new InetSocketAddress("127.0.0.1", 10001)); // InetSocketAddress 直接指定了 host 和 port
+
         Socket socket = new Socket("127.0.0.1", 10001); // client 联通了 server 后，会把 client 带入到 server，所以带入了输入输出流，不会串消息
         OutputStream outputStream = socket.getOutputStream();
         outputStream.write("服务端你好 ...".getBytes()); // 向服务端发送数据
