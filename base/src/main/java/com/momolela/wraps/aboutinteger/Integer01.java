@@ -1,4 +1,4 @@
-package com.momolela.likeinteger.integer;
+package com.momolela.wraps.aboutinteger;
 
 public class Integer01 {
     public static Integer d;
