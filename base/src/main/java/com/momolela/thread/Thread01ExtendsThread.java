@@ -8,7 +8,7 @@ package com.momolela.thread;
  */
 class Thread01ExtendsThreadDemo extends Thread {
     @Override
-    public void run() {
+    public void run() { // 不能向外抛出异常，因为继承的 Thread 类中 run 没有抛出异常
         // 真正要执行的代码
         for (int i = 0; i < 1000; i++) {
             System.out.println("thread run " + i);
