@@ -55,5 +55,8 @@ public class Integer01 {
         int a = 46;
         double b = 46.0;
         System.out.println(a == b);
+
+
+        System.out.println(Integer.parseInt(null));
     }
 }

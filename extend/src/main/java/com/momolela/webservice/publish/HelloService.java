@@ -1,5 +1,9 @@
 package com.momolela.webservice.publish;
 
+import javax.xml.soap.SOAPException;
+import java.io.IOException;
+
 public interface HelloService {
-    public String sayHello(String name);
+    String sayHello(String name);
+    String helloBigData() throws IOException, SOAPException;
 }
