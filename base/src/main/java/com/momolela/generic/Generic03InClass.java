@@ -54,7 +54,7 @@ public class Generic03InClass {
         UtilsNow<String> utilsNow = new UtilsNow<String>();
         String tool = utilsNow.getTool();
 
-        UtilsNowExtends<String> utilsNowExtends = new UtilsNowExtends<>();
+        UtilsNowExtends<String> utilsNowExtends = new UtilsNowExtends<String>();
         String toolExtends = utilsNowExtends.getTool();
     }
 }

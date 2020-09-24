@@ -2,6 +2,7 @@ package com.momolela.collection;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ListIterator;
 
 public class Collection01ArrayList {
@@ -44,6 +45,26 @@ public class Collection01ArrayList {
         }
 
         System.out.println("arrayList final is: " + arrayList);
+
+        /**
+         * 交集
+         */
+        List<String> arr0 = new ArrayList<String>();
+        List<String> arr1 = new ArrayList<String>();
+        arr1.add("sunzj");
+        arr1.add("liuhuan");
+        arr1.add("hufangyi");
+        for (String s : arr1) {
+            arr0.add(s);
+        }
+        List<String> arr2 = new ArrayList<String>();
+        arr2.add("sunzj");
+        arr2.add("hehe");
+        arr2.add("xixi");
+        arr0.retainAll(arr2);
+        System.out.println(arr0);
+        System.out.println(arr1);
+        System.out.println(arr2);
     }
 }
 
