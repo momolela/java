@@ -23,6 +23,18 @@
             <artifactId>spring-core</artifactId>
             <version>4.2.1.RELEASE</version>
         </dependency>
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.59</version>
+        </dependency>
+        <!-- netty -->
+        <dependency>
+            <groupId>org.jboss.netty</groupId>
+            <artifactId>netty</artifactId>
+            <version>3.2.2.Final</version>
+        </dependency>
     </dependencies>
 
 </project>
