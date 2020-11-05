@@ -44,5 +44,8 @@ public class String02Methods {
         System.out.println(str.trim());
         // 比较
         System.out.println(str.compareTo("bbbbbsunzj"));
+
+
+        System.out.println("fddfs_sdfsd".substring(0, "fddfs_sdfsd".indexOf("_")));
     }
 }
