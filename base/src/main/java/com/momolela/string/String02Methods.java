@@ -44,5 +44,16 @@ public class String02Methods {
         System.out.println(str.trim());
         // 比较
         System.out.println(str.compareTo("bbbbbsunzj"));
+
+
+        String haha = "POST /10.0.38.85:8399 HTTP/1.1\n" +
+                "Content-Type:application/as-xml\n" +
+                "Content-Length:766\n" +
+                "Connection: Close\n" +
+                "\n" +
+                "<BSXml><MsgHeader><Organization>2</Organization><Sender>HESP</Sender><ServiceType>service</ServiceType><MsgType>ODS_1001</MsgType><MsgVersion>3.0</MsgVersion></MsgHeader><MsgBody><as><seq>3300</seq><method>updateTriageKnowledgeBase</method><params><hospitalCode>cy01</hospitalCode><hospitalName>a</hospitalName><mainComplaintId>1010102</mainComplaintId><mainComplaintName>a</mainComplaintName><mainComplaintCode>null</mainComplaintCode><mainComplaintParentCode>null</mainComplaintParentCode><mainComplaintPinyinCode>ZDHXJP1</mainComplaintPinyinCode><triageLevel>null</triageLevel><treeLevel>null</treeLevel><departmentId>null</departmentId><cancelSign>null</cancelSign><diseaseType>4</diseaseType><operationType>update</operationType></params></as></MsgBody></BSXml>";
+
+        haha = haha.replace("\\n", "\\r\\n");
+        System.out.println(haha);
     }
 }

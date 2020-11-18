@@ -10,7 +10,7 @@ public class Net07TCPServerDemo {
     }
 
     private static void TCPServerDemo() throws IOException {
-        ServerSocket serverSocket = new ServerSocket(10001);
+        ServerSocket serverSocket = new ServerSocket(9000);
         Socket socket = serverSocket.accept();
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -18,6 +18,7 @@ public class Net07TCPServerDemo {
 
         String line = null;
         while ((line = bufferedReader.readLine()) != null) {
+            System.out.println(line);
             bufferedWriter.write(line.toUpperCase());
             bufferedWriter.newLine();
             bufferedWriter.flush();
