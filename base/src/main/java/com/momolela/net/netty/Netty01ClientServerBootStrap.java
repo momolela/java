@@ -178,10 +178,10 @@ class HelloClientHandler extends SimpleChannelUpstreamHandler {
         System.out.println("hello i am client");
         this.channel = e.getChannel();
         ChannelBuffer sendBuff = ChannelBuffers.dynamicBuffer(this.message.length() + 3);
-        sendBuff.writeByte(0X0B);
+//        sendBuff.writeByte(0X0B);
         sendBuff.writeBytes(this.message.getBytes(this.charset));
-        sendBuff.writeByte(0x1C);
-        sendBuff.writeByte(0x0D);
+//        sendBuff.writeByte(0x1C);
+//        sendBuff.writeByte(0x0D);
         for (int i = 0; i < reCycle; i++) {
             try {
                 if (timer != null)
