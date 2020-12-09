@@ -23,12 +23,11 @@ public class Netty02ClientBootstrapChannelHandlerAdapter {
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ChannelPipeline pipeline = ch.pipeline();
 
-                            String message = "POST /10.8.2.56:60023 HTTP/1.1\nContent-Type:application/as-xml;\nContent-Length: 562\nConnection: Close\n\n<BSXml><MsgHeader><Organization>1</Organization><Sender>ECIS</Sender><ServiceType>service</ServiceType><MsgType>ODS_07010002</MsgType><MsgVersion>3.0</MsgVersion></MsgHeader><MsgBody><as><seq>5289</seq><method>phportSetWristbands</method><params><hospitalCode>cy01</hospitalCode><hospitalName>创业智慧医院 </hospitalName><wristbandNum>0101</wristbandNum><wristbandID>42</wristbandID><tid>691</tid><pid>4859</pid><inpatientBrid>3184</inpatientBrid><triageNum>1223</triageNum><channelType>cs</channelType><operation>bind</operation></params></as></MsgBody></BSXml>";
-                            message = message.replaceAll("\\n", "\r\n");
+                            String message = "hello";
                             pipeline.addLast(new Netty02ClientHandler(message, false));
                         }
                     });
-            ChannelFuture future = bootstrap.connect("10.8.2.56", 60023);
+            ChannelFuture future = bootstrap.connect("127.0.0.1", 10001);
             future.channel().closeFuture().sync();
         } catch (Exception e) {
             e.printStackTrace();
