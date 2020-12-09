@@ -9,9 +9,11 @@ import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import org.jboss.netty.handler.timeout.TimeoutException;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
@@ -145,14 +147,29 @@ class HelloClient {
         // 客户端
         ClientBootstrap clientBootstrap = new ClientBootstrap(new NioClientSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool()));
         // 设置一个处理服务端消息和各种消息事件的类（handler）
+        String message = "POST /10.8.2.56:60023 HTTP/1.1\nContent-Type:application/as-xml;\nContent-Length: 562\nConnection: Close\n\n<BSXml><MsgHeader><Organization>1</Organization><Sender>ECIS</Sender><ServiceType>service</ServiceType><MsgType>ODS_07010002</MsgType><MsgVersion>3.0</MsgVersion></MsgHeader><MsgBody><as><seq>5289</seq><method>phportSetWristbands</method><params><hospitalCode>cy01</hospitalCode><hospitalName>创业智慧医院 </hospitalName><wristbandNum>0101</wristbandNum><wristbandID>42</wristbandID><tid>691</tid><pid>4859</pid><inpatientBrid>3184</inpatientBrid><triageNum>1223</triageNum><channelType>cs</channelType><operation>bind</operation></params></as></MsgBody></BSXml>";
+        message = message.replaceAll("\\n", "\r\n");
+        SyncHelloClientHandler ch = new SyncHelloClientHandler(message, "GB2312");
         clientBootstrap.setPipelineFactory(new ChannelPipelineFactory() {
             @Override
             public ChannelPipeline getPipeline() throws Exception {
-                return Channels.pipeline(new HelloClientHandler("hello i am sun", "UTF-8"));
+//                return Channels.pipeline(new SyncHelloClientHandler("haha", "utf-8"));
+
+//                return Channels.pipeline(new SyncHelloClientHandler("bsoft-service: bsxml格式化组件\r\nbsoft-urid: \r\nbsoft-pwd: \r\nbsoft-parameters: <BSXml> <Patient> <SourcePatientId>01041139</SourcePatientId> <SourcePatientIdType>IV</SourcePatientIdType> <AuthorOrganization>79649060-6</AuthorOrganization> <HealthRecordId/> <IdCard/> <IdCardCode/> <HealthCardId/> <MedicalInsuranceCategoryCode/> <Name>车海洋女</Name> <Sex>2</Sex> <BirthDate>20190104</BirthDate> <MaritalStatus>2</MaritalStatus> <Nationality>1</Nationality> <SystemTime>2019-01-21 20:26:16.0</SystemTime> <PrivacySign>0</PrivacySign> <Author>胡秀英</Author> <EthnicGroup>1</EthnicGroup> <OccupationCategoryCode>3</OccupationCategoryCode> <PatientPhone>13555781866</PatientPhone> <WorkUnit/> <WorkAddrPhone>13555781055</WorkAddrPhone> <Address _g=\"1\"> <AddrTypeCode>01</AddrTypeCode> <AddrTypeName>户籍住址</AddrTypeName> <Province>浙江省</Province> <City>台州市</City> <County>天台县</County> <Town>坦头西陈村</Town> <Village>-</Village> <HouseNumber>-</HouseNumber> <PostalCode>317200</PostalCode> </Address> <Card> <CardTypeCode>04</CardTypeCode> <CardNo>31800100021389929851</CardNo> </Card> <Card> <CardTypeCode>04</CardTypeCode> <CardNo>33109910015001602047</CardNo> </Card> <Card> <CardTypeCode>31</CardTypeCode> <CardNo>5001602047</CardNo> </Card> <Card> <CardTypeCode>32</CardTypeCode> <CardNo>01041139</CardNo> </Card> </Patient> <MsgHeader> <MsgVersion>3.1</MsgVersion> <LogTableName>LOG_PAT_0101_1</LogTableName> <Sender>HIS</Sender> <CreateBy>3</CreateBy> <LogTime>2019-03-21 18:36:04</LogTime> <DataId/> <EtlTaskCode>PAT_0101_1_IV</EtlTaskCode> <SourceId>1674061</SourceId> <RecordTitle>患者基本信息注册new</RecordTitle> <EffectiveTime>20190321T183604</EffectiveTime> <MsgType>PAT_0101</MsgType> <BatchId>c0ff382987a7841f</BatchId> </MsgHeader> </BSXml>\r\n", "UTF-8"));
+
+                return Channels.pipeline(ch);
             }
         });
-        // 连接到本地端口为 9000 的服务
-        clientBootstrap.connect(new InetSocketAddress("127.0.0.1", 9000));
+        // 连接到 ip port 的服务
+//        clientBootstrap.connect(new InetSocketAddress("10.8.2.162", 9529));
+//        clientBootstrap.connect(new InetSocketAddress("10.8.2.56", 60023));
+//        clientBootstrap.connect(new InetSocketAddress("127.0.0.1", 10001));
+        ChannelFuture future = clientBootstrap.connect(new InetSocketAddress("10.8.2.56", 60023));
+        // 返回数据
+        DefaultChannelFuture.setUseDeadLockChecker(false);
+        future.getChannel().getCloseFuture().awaitUninterruptibly();
+        clientBootstrap.releaseExternalResources();
+        System.out.println(ch.getResult());
     }
 }
 
@@ -165,6 +182,7 @@ class HelloClientHandler extends SimpleChannelUpstreamHandler {
     protected String charset; // 编码
     protected Channel channel;
     protected Object result;
+    protected byte[] resultByteArray = new byte[]{};
     protected boolean initiativeClose = false; // 主动断开
     protected Timer timer;
 
@@ -175,7 +193,6 @@ class HelloClientHandler extends SimpleChannelUpstreamHandler {
 
     @Override
     public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception {
-        System.out.println("hello i am client");
         this.channel = e.getChannel();
         ChannelBuffer sendBuff = ChannelBuffers.dynamicBuffer(this.message.length() + 3);
 //        sendBuff.writeByte(0X0B);
@@ -187,7 +204,7 @@ class HelloClientHandler extends SimpleChannelUpstreamHandler {
                 if (timer != null)
                     timer.cancel();
                 timer = new Timer();
-                timer.schedule(new TimeOut(this), 15000);
+                timer.schedule(new TimeOut(this), 301000);
                 ChannelFuture cf = channel.write(sendBuff);
                 break;
             } catch (Exception ex) {
@@ -199,16 +216,58 @@ class HelloClientHandler extends SimpleChannelUpstreamHandler {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) throws Exception {
-        this.result = (Exception) e.getCause();
-        callEnd();
-    }
+//        this.result = e.getCause();
+//        callEnd();
 
-    @Override
-    public void channelClosed(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception {
-        if (!initiativeClose) { // 被动断开链接（如果这个时候还没有返回值，则触发该异常）
-            this.result = new java.io.IOException("远程主机中的软件中止了一个已建立的连接。");
+        if (e.getCause() instanceof IOException && e.getCause().getMessage().indexOf("远程主机强迫关闭了一个现有的连接") != -1) {
+            System.out.println("远程主机强迫关闭了一个现有的连接");
+        } else {
+            this.result = e.getCause();
             callEnd();
         }
+    }
+
+    /**
+     * 连接关闭
+     *
+     * @param ctx
+     * @param e
+     * @throws Exception
+     */
+    @Override
+    public void channelClosed(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception {
+        if (!initiativeClose) { // 被动断开链接
+            if (!(this.result instanceof Exception)) {
+                this.result = new String(resultByteArray);
+                callEnd();
+            }
+        }
+    }
+
+    /**
+     * 连接断开
+     *
+     * @param ctx
+     * @param e
+     * @throws Exception
+     */
+    @Override
+    public void channelDisconnected(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception {
+        if (!initiativeClose) { // 被动断开链接
+            if (!(this.result instanceof Exception)) {
+                this.result = new String(resultByteArray);
+                callEnd();
+            }
+        }
+    }
+
+    /**
+     * 获取最终结果
+     *
+     * @return
+     */
+    public Object getResult() {
+        return this.result;
     }
 
     /**
@@ -251,20 +310,32 @@ class AsyncHelloClientHandler extends HelloClientHandler {
     }
 }
 
+/**
+ * 同步客户端句柄
+ */
 class SyncHelloClientHandler extends HelloClientHandler {
     public SyncHelloClientHandler(String message, String charset) {
         super(message, charset);
         this.message = message;
     }
 
+    /**
+     * 数据是分段接收的，要么用特殊字符串分割去处理粘包，要么服务端使用短连接
+     *
+     * @param ctx
+     * @param e
+     */
     @Override
     public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
         try {
             ChannelBuffer acceptBuff = (ChannelBuffer) e.getMessage();
-            this.result = acceptBuff.toString(Charset.defaultCharset()).trim();
+            int oriLength = resultByteArray.length;
+            resultByteArray = Arrays.copyOf(resultByteArray, resultByteArray.length + acceptBuff.array().length);
+            for (int i = 0; i < acceptBuff.array().length; i++) {
+                resultByteArray[i + oriLength] = acceptBuff.array()[i];
+            }
         } catch (Exception ex) {
             this.result = ex;
-        } finally {
             callEnd();
         }
     }
