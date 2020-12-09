@@ -16,13 +16,13 @@ public class Regex01Base {
         }
         System.out.println(line);
 
-        // 取出 bsoft_service[] 中括号中的内容
-        String regex = "bsoft_service\\[(.*?)]";
+
+        // 取出 bsoft-service: \r\n 中的内容
+        String regex = "bsoft-service: (.*?)\\r\\n";
         Pattern pattern1 = Pattern.compile(regex);
-        Matcher matcher1 = pattern1.matcher("nihao#dfbsoft_service[d#]ggfgd#fbsoft_service[g#gf]d");
+        Matcher matcher1 = pattern1.matcher("nihao#dfbsoft-service: nihao\r\nggfgd#fbsoft-service: [g#gf]\r\nd");
         while (matcher1.find()) {
             System.out.println(matcher1.group(1));
-            break;
         }
     }
 }
