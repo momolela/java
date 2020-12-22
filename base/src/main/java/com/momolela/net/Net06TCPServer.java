@@ -603,7 +603,7 @@ public class Net06TCPServer {
                     "</MsgBody>\n" +
                     "</BSXml>";
             outputStream.write(message.getBytes()); // 向客户端返回数据
-            socket.close(); // 关闭 socket 连接
+//            socket.close(); // 关闭 socket 连接
 //        serverSocket.close(); // 关闭服务端
         }
     }
