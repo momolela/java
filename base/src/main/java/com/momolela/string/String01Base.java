@@ -21,6 +21,7 @@ public class String01Base {
         System.out.println(b1.equals(b2)); // true，内容相同
 
 
+        System.out.println((String)null);  // 变成字符串 null
         System.out.println(StringUtils.isEmpty((String) null)); // true
     }
 }

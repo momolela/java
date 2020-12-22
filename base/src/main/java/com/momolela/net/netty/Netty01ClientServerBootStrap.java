@@ -147,9 +147,9 @@ class HelloClient {
         // 客户端
         ClientBootstrap clientBootstrap = new ClientBootstrap(new NioClientSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool()));
         // 设置一个处理服务端消息和各种消息事件的类（handler）
-        String message = "POST /10.8.2.56:60023 HTTP/1.1\nContent-Type:application/as-xml;\nContent-Length: 562\nConnection: Close\n\n<BSXml><MsgHeader><Organization>1</Organization><Sender>ECIS</Sender><ServiceType>service</ServiceType><MsgType>ODS_07010002</MsgType><MsgVersion>3.0</MsgVersion></MsgHeader><MsgBody><as><seq>5289</seq><method>phportSetWristbands</method><params><hospitalCode>cy01</hospitalCode><hospitalName>创业智慧医院 </hospitalName><wristbandNum>0101</wristbandNum><wristbandID>42</wristbandID><tid>691</tid><pid>4859</pid><inpatientBrid>3184</inpatientBrid><triageNum>1223</triageNum><channelType>cs</channelType><operation>bind</operation></params></as></MsgBody></BSXml>";
+        String message = "POST /10.8.2.56:60023 HTTP/1.1\nContent-Type:application/as-xml;\nContent-Length:851\nConnection: Close\n\n<BSXml><MsgHeader><Organization>1</Organization><Sender>ECIS</Sender><ServiceType>service</ServiceType><MsgType>ODS_03120006</MsgType><MsgVersion>3.0</MsgVersion></MsgHeader><MsgBody><as><seq>6240</seq><method>phportNotifyPatientGrade</method><params><hospitalName>创业智慧医院 </hospitalName><hospitalCode>cy01</hospitalCode><tid>731</tid><pid>4902</pid><inpatientBrid>3315</inpatientBrid><grade><recordID>476</recordID><name>20-12-09 15:28 林力扬</name><createTime>2020-12-09 15:28:28</createTime><operator>林力扬</operator><conclusion>中度风险</conclusion><description></description><score>12</score><issScore></issScore></grade></params></as></MsgBody></BSXml>";
         message = message.replaceAll("\\n", "\r\n");
-        SyncHelloClientHandler ch = new SyncHelloClientHandler(message, "GB2312");
+        SyncHelloClientHandler ch = new SyncHelloClientHandler(message, "UTF-8");
         clientBootstrap.setPipelineFactory(new ChannelPipelineFactory() {
             @Override
             public ChannelPipeline getPipeline() throws Exception {
@@ -165,7 +165,7 @@ class HelloClient {
 //        clientBootstrap.connect(new InetSocketAddress("10.8.2.56", 60023));
 //        clientBootstrap.connect(new InetSocketAddress("127.0.0.1", 10001));
         ChannelFuture future = clientBootstrap.connect(new InetSocketAddress("10.8.2.56", 60023));
-        // 返回数据
+//        // 返回数据
         DefaultChannelFuture.setUseDeadLockChecker(false);
         future.getChannel().getCloseFuture().awaitUninterruptibly();
         clientBootstrap.releaseExternalResources();

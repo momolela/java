@@ -39,8 +39,14 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>5.0.0.Alpha1</version>
+            <version>4.1.20.Final</version>
         </dependency>
+        <!-- netty-all -->
+<!--        <dependency>-->
+<!--            <groupId>io.netty</groupId>-->
+<!--            <artifactId>netty-all</artifactId>-->
+<!--            <version>5.0.0.Alpha1</version>-->
+<!--        </dependency>-->
         <!-- javax.xml.rpc-api -->
         <dependency>
             <groupId>javax.xml.rpc</groupId>
