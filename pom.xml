@@ -14,6 +14,7 @@
         <module>extend</module>
         <module>jar</module>
         <module>util</module>
+        <module>jvm</module>
     </modules>
 
 
