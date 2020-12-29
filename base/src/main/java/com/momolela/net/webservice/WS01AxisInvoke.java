@@ -17,7 +17,7 @@ import java.util.concurrent.Future;
 public class WS01AxisInvoke {
 
     public static void main(String[] args) {
-        int total = 100;
+        int total = 1;
         long totalCost = 0;
         ExecutorService threadPool = Executors.newFixedThreadPool(200);
         List<Future> futureList = new ArrayList<>();
@@ -44,7 +44,7 @@ public class WS01AxisInvoke {
         public Long call() {
             String soapAction = "http://ws.access.hai/";
             // 你的webservice地址
-            String endpoint = "http://10.8.2.164:9528/hai/WebServiceEntry?wsdl";
+            String endpoint = "http://10.8.2.74:9528/hai/WebServiceEntry?wsdl";
             Service service = new Service();
             try {
                 Call call = (Call) service.createCall();
@@ -70,7 +70,7 @@ public class WS01AxisInvoke {
                 call.addParameter("parameter", Constants.XSD_STRING, String.class, ParameterMode.IN);
 
                 long s = System.currentTimeMillis();
-                String result = (String) (call.invoke(new Object[]{"ODS_getMedicalRecordInformation", "", "", "<BSXml><MsgHeader><Organization>1</Organization><Sender>GOL</Sender><ServiceType>service</ServiceType><MsgType>ODS_02100005</MsgType><MsgVersion>3.3</MsgVersion></MsgHeader><MsgBody><VisitOrganization>1</VisitOrganization><VisitId>71</VisitId></MsgBody></BSXml>"}));
+                String result = (String) (call.invoke(new Object[]{"ODS_ConfirmAppointment", "", "", "<BSXml><MsgHeader><Organization>41959207-6</Organization><Sender>HOL</Sender><ServiceType>service</ServiceType><MsgType>ODS_02040009</MsgType><MsgVersion>3.3</MsgVersion></MsgHeader><MsgBody><Query><ChannelCode>1000</ChannelCode><MPI>9296253847a84ff9884f279b9b8adbcc</MPI><VisitOrganization>41959207-6</VisitOrganization><OutpatientType>101</OutpatientType><SourcePatientId>111</SourcePatientId><IdCard>110101199203078288</IdCard><IdCardCode>null</IdCardCode><MedicalCardType>4</MedicalCardType><MedicalCardID>1908001095</MedicalCardID><Name>黎阳路</Name><Sex>2</Sex><Age>28</Age><PatientMobile>15800001110</PatientMobile><DeptCode>1204</DeptCode><RequestDoctor>2030003</RequestDoctor><ResourcesId>464461</ResourcesId></Query></MsgBody></BSXml>"}));
                 long e = System.currentTimeMillis();
                 System.out.println(result);
                 long cost = e - s;
