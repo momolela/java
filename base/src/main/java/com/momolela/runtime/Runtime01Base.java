@@ -22,6 +22,11 @@ public class Runtime01Base {
 
         process.destroy();
 
+        /**
+         * 获取 cpu 的内核数
+         */
+        System.out.println(runtime.availableProcessors());
+
     }
 
 }
