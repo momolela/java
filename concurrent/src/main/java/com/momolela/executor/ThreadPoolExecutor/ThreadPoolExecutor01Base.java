@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * TimeUnit unit：线程池中线程的闲置最大时间的单位
  * BlockingQueue<Runnable> workQueue：任务队列
  * ThreadFactory threadFactory：创建线程的工具类，可以自定义线程名称
- * RejectedExecutionHandler handler：拒绝策略
+ * RejectedExecutionHandler handler：拒绝策略，当ThreadPoolExecutor已经关闭或ThreadPoolExecutor已经饱和时（达到了最大线程池大小且工作队列已满），execute()方法将要调用的Handler
  */
 public class ThreadPoolExecutor01Base {
 
