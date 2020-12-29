@@ -6,10 +6,10 @@ import java.util.concurrent.Executors;
 /**
  * CachedThreadPool是一个会根据需要去创建新线程的线程池
  */
-public class CachedThreadPool {
+public class ThreadPoolExecutor02CachedThreadPool {
 
     public static void main(String[] args) {
-        ExecutorService executorService = Executors.newCachedThreadPool();
+        ExecutorService executorService = Executors.newCachedThreadPool(); // 内部就是 ThreadPoolExecutor
         executorService.submit(new Runnable() {
             @Override
             public void run() {

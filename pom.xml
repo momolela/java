@@ -12,6 +12,8 @@
         <module>base</module>
         <module>concurrent</module>
         <module>extend</module>
+        <module>jar</module>
+        <module>util</module>
     </modules>
 
 
