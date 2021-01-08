@@ -52,6 +52,9 @@ public class String02Methods {
         System.out.println(haha);
 
 
-        System.out.println("fddfs_sdfsd".substring(0, "fddfs_sdfsd".indexOf("_")));
+        System.out.println("fddfs_sdfsd".substring(0, "fddfs_sdfsd".indexOf("_"))); // fddfs
+
+
+        System.out.println("fddfs_qwert".substring(3)); // fs_qwert
     }
 }
