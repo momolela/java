@@ -1,5 +1,6 @@
 package com.momolela.system;
 
+import java.nio.charset.Charset;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
@@ -36,6 +37,11 @@ public class System01Base {
         System.out.println(System.currentTimeMillis());
         System.out.println(new Date().getTime());
         System.out.println(Calendar.getInstance().getTimeInMillis());
+
+
+        // 打印本机默认编码
+        System.out.println("本机的默认编码 ===== " + System.getProperty("file.encoding"));
+        System.out.println("本机的默认编码 ===== " + Charset.defaultCharset().name());
     }
 
 }
