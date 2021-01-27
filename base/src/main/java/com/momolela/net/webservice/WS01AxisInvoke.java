@@ -44,7 +44,7 @@ public class WS01AxisInvoke {
         public Long call() {
             String soapAction = "http://ws.access.hai/";
             // 你的webservice地址
-            String endpoint = "http://10.8.2.74:9528/hai/WebServiceEntry?wsdl";
+            String endpoint = "http://10.8.2.73:9528/hai/WebServiceEntry?wsdl";
             Service service = new Service();
             try {
                 Call call = (Call) service.createCall();
@@ -70,7 +70,12 @@ public class WS01AxisInvoke {
                 call.addParameter("parameter", Constants.XSD_STRING, String.class, ParameterMode.IN);
 
                 long s = System.currentTimeMillis();
-                String result = (String) (call.invoke(new Object[]{"ODS_ConfirmAppointment", "", "", "<BSXml><MsgHeader><Organization>41959207-6</Organization><Sender>HOL</Sender><ServiceType>service</ServiceType><MsgType>ODS_02040009</MsgType><MsgVersion>3.3</MsgVersion></MsgHeader><MsgBody><Query><ChannelCode>1000</ChannelCode><MPI>9296253847a84ff9884f279b9b8adbcc</MPI><VisitOrganization>41959207-6</VisitOrganization><OutpatientType>101</OutpatientType><SourcePatientId>111</SourcePatientId><IdCard>110101199203078288</IdCard><IdCardCode>null</IdCardCode><MedicalCardType>4</MedicalCardType><MedicalCardID>1908001095</MedicalCardID><Name>黎阳路</Name><Sex>2</Sex><Age>28</Age><PatientMobile>15800001110</PatientMobile><DeptCode>1204</DeptCode><RequestDoctor>2030003</RequestDoctor><ResourcesId>464461</ResourcesId></Query></MsgBody></BSXml>"}));
+                String result = (String) (call.invoke(new Object[]{"phportNotifyHospitalPatients", "", "", "POST /10.8.2.56:60023 HTTP/1.1\n" +
+                        "Content-Type:application/as-xml;\n" +
+                        "Content-Length:1271\n" +
+                        "Connection: Close\n" +
+                        "\n" +
+                        "<BSXml>  <MsgHeader>    <Organization>41959207-6</Organization>    <Sender>HIS</Sender>    <ServiceType>service</ServiceType>    <MsgType>ODS_03120005</MsgType>    <MsgVersion>3.3</MsgVersion>  </MsgHeader><MsgBody><as><method>phportNotifyHospitalPatients</method><seq>1</seq><params><hospitalCode>41959207-6</hospitalCode><hospitalName>创业智慧医院</hospitalName><patient><action>update</action><inpatientBrid>1572</inpatientBrid><triageNum></triageNum><triageTime>1900-01-01 00:00:00</triageTime><channelType></channelType><triageLevel></triageLevel><triageArea></triageArea><inpatientNumber>1908000203</inpatientNumber ><outpatientNumber></outpatientNumber><arriveHospitalDate>2019-09-11 16:38:27</arriveHospitalDate><wristbandNum></wristbandNum><wristbandID></wristbandID><patientComplaint></patientComplaint><name>小米</name><age>84</age><sex>男</sex><borndate>1936-10-07 00:00:00</borndate><contactPhone>13526591386</contactPhone><contactName>小米</contactName><identityType>身份证</identityType><identityNumber>342423193610071958</identityNumber><bloodOxygen></bloodOxygen><pulse></pulse><bodyTemperature></bodyTemperature><breathe></breathe><bloodPressure></bloodPressure><alertness></alertness></patient><tid></tid><pid>3259</pid></params></as></MsgBody></BSXml>"}));
                 long e = System.currentTimeMillis();
                 System.out.println(result);
                 long cost = e - s;
