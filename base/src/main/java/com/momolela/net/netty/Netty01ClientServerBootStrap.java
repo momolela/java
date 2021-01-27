@@ -147,7 +147,12 @@ class HelloClient {
         // 客户端
         ClientBootstrap clientBootstrap = new ClientBootstrap(new NioClientSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool()));
         // 设置一个处理服务端消息和各种消息事件的类（handler）
-        String message = "POST /10.8.2.56:60023 HTTP/1.1\nContent-Type:application/as-xml;\nContent-Length:851\nConnection: Close\n\n<BSXml><MsgHeader><Organization>1</Organization><Sender>ECIS</Sender><ServiceType>service</ServiceType><MsgType>ODS_03120006</MsgType><MsgVersion>3.0</MsgVersion></MsgHeader><MsgBody><as><seq>6240</seq><method>phportNotifyPatientGrade</method><params><hospitalName>创业智慧医院 </hospitalName><hospitalCode>cy01</hospitalCode><tid>731</tid><pid>4902</pid><inpatientBrid>3315</inpatientBrid><grade><recordID>476</recordID><name>20-12-09 15:28 林力扬</name><createTime>2020-12-09 15:28:28</createTime><operator>林力扬</operator><conclusion>中度风险</conclusion><description></description><score>12</score><issScore></issScore></grade></params></as></MsgBody></BSXml>";
+        String message = "POST /10.8.2.56:60023 HTTP/1.1\n" +
+                "Content-Type:application/as-xml;\n" +
+                "Content-Length:1271\n" +
+                "Connection: Close\n" +
+                "\n" +
+                "<BSXml>  <MsgHeader>    <Organization>41959207-6</Organization>    <Sender>HIS</Sender>    <ServiceType>service</ServiceType>    <MsgType>ODS_03120005</MsgType>    <MsgVersion>3.3</MsgVersion>  </MsgHeader><MsgBody><as><method>phportNotifyHospitalPatients</method><seq>1</seq><params><hospitalCode>41959207-6</hospitalCode><hospitalName>创业智慧医院</hospitalName><patient><action>update</action><inpatientBrid>1572</inpatientBrid><triageNum></triageNum><triageTime>1900-01-01 00:00:00</triageTime><channelType></channelType><triageLevel></triageLevel><triageArea></triageArea><inpatientNumber>1908000203</inpatientNumber ><outpatientNumber></outpatientNumber><arriveHospitalDate>2019-09-11 16:38:27</arriveHospitalDate><wristbandNum></wristbandNum><wristbandID></wristbandID><patientComplaint></patientComplaint><name>小米</name><age>84</age><sex>男</sex><borndate>1936-10-07 00:00:00</borndate><contactPhone>13526591386</contactPhone><contactName>小米</contactName><identityType>身份证</identityType><identityNumber>342423193610071958</identityNumber><bloodOxygen></bloodOxygen><pulse></pulse><bodyTemperature></bodyTemperature><breathe></breathe><bloodPressure></bloodPressure><alertness></alertness></patient><tid></tid><pid>3259</pid></params></as></MsgBody></BSXml>";
         message = message.replaceAll("\\n", "\r\n");
         SyncHelloClientHandler ch = new SyncHelloClientHandler(message, "UTF-8");
         clientBootstrap.setPipelineFactory(new ChannelPipelineFactory() {

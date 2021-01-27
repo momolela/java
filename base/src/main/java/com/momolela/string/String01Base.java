@@ -2,6 +2,9 @@ package com.momolela.string;
 
 import org.springframework.util.StringUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class String01Base {
     public static void main(String[] args) {
         String s1 = new String();
@@ -21,7 +24,10 @@ public class String01Base {
         System.out.println(b1.equals(b2)); // true，内容相同
 
 
-        System.out.println((String)null);  // 变成字符串 null
-        System.out.println(StringUtils.isEmpty((String) null)); // true
+        Map<String, Object> test = new HashMap<>();
+        String testStr = (String) test.get("test");
+//        System.out.println(testStr.getClass()); // 这里会报空指针异常，因为 testStr 还是为 null
+        System.out.println(testStr);  // 打印的是 null
+        System.out.println(StringUtils.isEmpty(testStr)); // true
     }
 }
