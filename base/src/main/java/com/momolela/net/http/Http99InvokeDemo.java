@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class HTTP01Invoke {
+public class Http99InvokeDemo {
 
     public static void main(String[] args) {
 //        testHaiHttp();
@@ -95,8 +95,8 @@ public class HTTP01Invoke {
     }
 
     public static void testHISHttp() {
-        int total = 1;
-        long totalCost = 0;
+        int total = 1; // 并发次数
+        long totalCost = 0; // 总共耗时
         ExecutorService threadPool = Executors.newFixedThreadPool(5);
         List<Future> futureList = new ArrayList<>();
         for (int i = 0; i < total; i++) {
