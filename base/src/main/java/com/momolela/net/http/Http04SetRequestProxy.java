@@ -10,20 +10,21 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+import java.io.IOException;
+
 public class Http04SetRequestProxy {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         CloseableHttpClient client = HttpClients.createDefault();
 
-        // 设置请求代理，解决通过一个客户端频繁访问，然后客户端被封禁的问题；可以去 ip66 的网站找测试用的免费 ip 和 port
-        String ip = "127.0.0.1";
-        int port = 8000;
+        // 设置请求代理，解决通过一个客户端频繁访问，然后客户端被封禁的问题；可以去 66ip 的网站找测试用的免费 ip 和 port
+        String ip = "192.109.165.114";
+        int port = 80;
         HttpHost httpHost = new HttpHost(ip, port);
         RequestConfig requestConfig = RequestConfig.custom().setProxy(httpHost).build();
 
         String url = "https://www.baidu.com";
         HttpGet httpGet = new HttpGet(url);
         httpGet.setConfig(requestConfig);
-
 
         CloseableHttpResponse response = null;
         try {
@@ -36,16 +37,24 @@ public class Http04SetRequestProxy {
                 String s = EntityUtils.toString(entity);
                 System.out.println(s);
             } else {
-                System.out.println("通过请求代理访问失败");
+                System.out.println("通过请求代理访问失败，原因是：" + response.getStatusLine().getReasonPhrase());
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (client != null) {
-                client.close();
+                try {
+                    client.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             if (response != null) {
-                response.close();
+                try {
+                    response.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
