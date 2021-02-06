@@ -1,26 +1,24 @@
-package com.momolela.net.http;
+package com.momolela.net.http.proxy;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class Http99InvokeDemo {
+public class HttpProxy99InvokeDemo {
 
     public static void main(String[] args) {
 //        testHaiHttp();
@@ -62,35 +60,55 @@ public class Http99InvokeDemo {
 //            return null;
 
 
-            CloseableHttpResponse response = null;
-            CloseableHttpClient client = null;
-            try {
-                HttpPost put = new HttpPost("http://10.8.2.178:8081/bs-whis/BSXml_webCloudClinic/getMedicalRecordInformation");
-                StringEntity entity = new StringEntity("<BSXml><MsgHeader><Organization>1</Organization><Sender>GOL</Sender><ServiceType>service</ServiceType><MsgType>ODS_02100005</MsgType><MsgVersion>3.3</MsgVersion></MsgHeader><MsgBody><VisitOrganization>1</VisitOrganization><VisitId>71</VisitId></MsgBody></BSXml>", "UTF-8");
-                put.setEntity(entity);
-                put.addHeader("Content-Type", "application/xml");
-                client = HttpClientBuilder.create().build();
+//            CloseableHttpResponse response = null;
+//            CloseableHttpClient client = null;
+//            try {
+//                HttpPost put = new HttpPost("http://10.8.2.178:8081/bs-whis/BSXml_webCloudClinic/getMedicalRecordInformation");
+//                StringEntity entity = new StringEntity("<BSXml><MsgHeader><Organization>1</Organization><Sender>GOL</Sender><ServiceType>service</ServiceType><MsgType>ODS_02100005</MsgType><MsgVersion>3.3</MsgVersion></MsgHeader><MsgBody><VisitOrganization>1</VisitOrganization><VisitId>71</VisitId></MsgBody></BSXml>", "UTF-8");
+//                put.setEntity(entity);
+//                put.addHeader("Content-Type", "application/xml");
+//                client = HttpClientBuilder.create().build();
+//
+//                long s = System.currentTimeMillis();
+//                response = client.execute(put);
+//                long e = System.currentTimeMillis();
+//                long cost = e - s;
+//                System.out.println(cost);
+//
+//                HttpEntity responseEntity = response.getEntity();
+//                System.out.println(EntityUtils.toString(responseEntity, "UTF-8"));
+//                return cost;
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            } finally {
+//                try {
+//                    client.close();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            return null;
 
+
+            try {
                 long s = System.currentTimeMillis();
-                response = client.execute(put);
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/xml");
+                Map<String, Object> map = HttpProxy10HttpClientUtil.doPostString(
+                        "http://10.8.2.178:8081/bs-whis/BSXml_webCloudClinic/getMedicalRecordInformation",
+                        headers,
+                        "<BSXml><MsgHeader><Organization>1</Organization><Sender>GOL</Sender><ServiceType>service</ServiceType><MsgType>ODS_02100005</MsgType><MsgVersion>3.3</MsgVersion></MsgHeader><MsgBody><VisitOrganization>1</VisitOrganization><VisitId>71</VisitId></MsgBody></BSXml>",
+                        null,
+                        null);
+                System.out.println("status: " + map.get("status") + ", content: " + map.get("content"));
                 long e = System.currentTimeMillis();
                 long cost = e - s;
                 System.out.println(cost);
-
-                HttpEntity responseEntity = response.getEntity();
-                System.out.println(EntityUtils.toString(responseEntity, "UTF-8"));
                 return cost;
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    client.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             }
             return null;
-
         }
     }
 

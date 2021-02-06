@@ -1,4 +1,4 @@
-package com.momolela.net.http;
+package com.momolela.net.http.proxy;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
@@ -10,7 +10,7 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.FileOutputStream;
 
-public class Http03GetImageFromWeb {
+public class HttpProxy03GetImageFromWeb {
     public static void main(String[] args) throws Exception {
         CloseableHttpClient client = HttpClients.createDefault();
         String url = "http://himg.bdimg.com/sys/portrait/item/1cf4e5ad99e88287e5b086a837.jpg";

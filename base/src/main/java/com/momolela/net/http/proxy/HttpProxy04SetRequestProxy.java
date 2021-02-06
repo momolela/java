@@ -1,46 +1,43 @@
-package com.momolela.net.http;
+package com.momolela.net.http.proxy;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Http06SendFormParam {
-    public static void main(String[] args) throws Exception {
+public class HttpProxy04SetRequestProxy {
+    public static void main(String[] args) {
         CloseableHttpClient client = HttpClients.createDefault();
 
-        String url = "https://www.baidu.com";
-        HttpPost httpPost = new HttpPost(url);
+        // 设置请求代理，解决通过一个客户端频繁访问，然后客户端被封禁的问题；可以去 66ip 的网站找测试用的免费 ip 和 port
+        String ip = "192.109.165.114";
+        int port = 80;
+        HttpHost httpHost = new HttpHost(ip, port);
+        RequestConfig requestConfig = RequestConfig.custom().setProxy(httpHost).build();
 
-        // 发送表单类型的 post 请求，Content-Type 默认是：application/x-www-form-urlencoded
-        List<NameValuePair> nvpList = new ArrayList<>();
-        nvpList.add(new BasicNameValuePair("name", "szj"));
-        nvpList.add(new BasicNameValuePair("age", "25"));
-        UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(nvpList, Charset.defaultCharset());
-        httpPost.setEntity(formEntity);
+        String url = "https://www.baidu.com";
+        HttpGet httpGet = new HttpGet(url);
+        httpGet.setConfig(requestConfig);
 
         CloseableHttpResponse response = null;
         try {
-            response = client.execute(httpPost);
+            response = client.execute(httpGet);
             int statusCode = response.getStatusLine().getStatusCode();
+
             if (HttpStatus.SC_OK == statusCode) {
-                System.out.println("请求成功");
+                System.out.println("通过请求代理访问成功");
                 HttpEntity entity = response.getEntity();
                 String s = EntityUtils.toString(entity);
                 System.out.println(s);
             } else {
-                System.out.println("请求失败，原因是：" + response.getStatusLine().getReasonPhrase());
+                System.out.println("通过请求代理访问失败，原因是：" + response.getStatusLine().getReasonPhrase());
             }
         } catch (Exception e) {
             e.printStackTrace();

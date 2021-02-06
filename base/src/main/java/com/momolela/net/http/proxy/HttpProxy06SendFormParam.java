@@ -1,36 +1,42 @@
-package com.momolela.net.http;
+package com.momolela.net.http.proxy;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.config.RequestConfig;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Http05SetConnectSocketTimeout {
-    public static void main(String[] args) {
+/**
+ * 发送简单的表单参数
+ */
+public class HttpProxy06SendFormParam {
+    public static void main(String[] args) throws Exception {
         CloseableHttpClient client = HttpClients.createDefault();
 
-        RequestConfig requestConfig = RequestConfig.custom()
-                // 连接超时，ms，指 tcp 3次握手的时间上限
-                .setConnectTimeout(10) // 10ms，会报异常，时间不够
-                // 读取超时，ms，指获取响应数据的时间间隔上限
-                .setSocketTimeout(5000)
-                .build();
-
         String url = "https://www.baidu.com";
-        HttpGet httpGet = new HttpGet(url);
-        httpGet.setConfig(requestConfig);
+        HttpPost httpPost = new HttpPost(url);
+
+        // 发送表单类型的 post 请求，Content-Type 默认是：application/x-www-form-urlencoded
+        List<NameValuePair> nvpList = new ArrayList<>();
+        nvpList.add(new BasicNameValuePair("name", "szj"));
+        nvpList.add(new BasicNameValuePair("age", "25"));
+        UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(nvpList, Charset.defaultCharset());
+        httpPost.setEntity(formEntity);
 
         CloseableHttpResponse response = null;
         try {
-            response = client.execute(httpGet);
+            response = client.execute(httpPost);
             int statusCode = response.getStatusLine().getStatusCode();
-
             if (HttpStatus.SC_OK == statusCode) {
                 System.out.println("请求成功");
                 HttpEntity entity = response.getEntity();

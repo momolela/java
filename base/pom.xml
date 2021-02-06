@@ -12,23 +12,30 @@
     <artifactId>base</artifactId>
 
     <dependencies>
+        <!-- spring-core -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.2.1.RELEASE</version>
+        </dependency>
+
+
         <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.6</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>4.2.1.RELEASE</version>
-        </dependency>
+
+
         <!-- fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.59</version>
         </dependency>
+
+
         <!-- netty -->
         <dependency>
             <groupId>org.jboss.netty</groupId>
@@ -42,11 +49,13 @@
             <version>4.1.20.Final</version>
         </dependency>
         <!-- netty-all -->
-<!--        <dependency>-->
-<!--            <groupId>io.netty</groupId>-->
-<!--            <artifactId>netty-all</artifactId>-->
-<!--            <version>5.0.0.Alpha1</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.netty</groupId>-->
+        <!--            <artifactId>netty-all</artifactId>-->
+        <!--            <version>5.0.0.Alpha1</version>-->
+        <!--        </dependency>-->
+
+
         <!-- javax.xml.rpc-api -->
         <dependency>
             <groupId>javax.xml.rpc</groupId>
@@ -89,12 +98,22 @@
             <artifactId>wsdl4j</artifactId>
             <version>1.4</version>
         </dependency>
+
+
         <!-- httpClient -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.3</version>
         </dependency>
+        <!-- httpmime -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.5.1</version>
+        </dependency>
+
+
     </dependencies>
 
 </project>

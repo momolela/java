@@ -1,4 +1,4 @@
-package com.momolela.net.http;
+package com.momolela.net.http.proxy;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Http01JavaUrl {
+public class HttpProxy01JavaUrl {
 
     public static void main(String[] args) throws Exception {
         URL url = new URL("http://www.baidu.com");
