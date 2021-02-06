@@ -1,4 +1,4 @@
-package com.momolela.net.http;
+package com.momolela.net.http.proxy;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -19,7 +19,7 @@ import java.nio.charset.Charset;
  * 2、加请求头
  * 3、有参数的时候，要使用 UrlEncode 进行编码
  */
-public class Http02HttpClientGet {
+public class HttpProxy02HttpClientGet {
     public static void main(String[] args) throws Exception {
         // 创建 CloseableHttpClient 对象
         CloseableHttpClient client = HttpClients.createDefault();
@@ -67,5 +67,11 @@ public class Http02HttpClientGet {
                 e.printStackTrace();
             }
         }
+
+//        Map<String, String> headers = new HashMap<>();
+//        headers.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36");
+//        headers.put("Referer", "https://www.baidu.com/");
+//        Map<String, Object> map = Http10HttpClientUtil.doGet("https://www.baidu.com", headers, null);
+//        System.out.println(map);
     }
 }

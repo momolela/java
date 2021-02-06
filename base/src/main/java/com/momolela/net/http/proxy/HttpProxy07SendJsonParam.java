@@ -1,43 +1,48 @@
-package com.momolela.net.http;
+package com.momolela.net.http.proxy;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpHost;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 
-public class Http04SetRequestProxy {
+/**
+ * 发送 json 参数
+ */
+public class HttpProxy07SendJsonParam {
     public static void main(String[] args) {
         CloseableHttpClient client = HttpClients.createDefault();
 
-        // 设置请求代理，解决通过一个客户端频繁访问，然后客户端被封禁的问题；可以去 66ip 的网站找测试用的免费 ip 和 port
-        String ip = "192.109.165.114";
-        int port = 80;
-        HttpHost httpHost = new HttpHost(ip, port);
-        RequestConfig requestConfig = RequestConfig.custom().setProxy(httpHost).build();
-
         String url = "https://www.baidu.com";
-        HttpGet httpGet = new HttpGet(url);
-        httpGet.setConfig(requestConfig);
+        HttpPost httpPost = new HttpPost(url);
+
+        // 发送 json 类型的 post 请求，Content-Type 默认是：application/json
+        httpPost.setHeader("Content-Type", "application/json");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", "szj");
+        jsonObject.put("age", "25");
+        StringEntity jsonEntity = new StringEntity(jsonObject.toString(), Charset.defaultCharset().name());
+        jsonEntity.setContentEncoding(Charset.defaultCharset().name());
+        httpPost.setEntity(jsonEntity);
 
         CloseableHttpResponse response = null;
         try {
-            response = client.execute(httpGet);
+            response = client.execute(httpPost);
             int statusCode = response.getStatusLine().getStatusCode();
-
             if (HttpStatus.SC_OK == statusCode) {
-                System.out.println("通过请求代理访问成功");
+                System.out.println("请求成功");
                 HttpEntity entity = response.getEntity();
                 String s = EntityUtils.toString(entity);
                 System.out.println(s);
             } else {
-                System.out.println("通过请求代理访问失败，原因是：" + response.getStatusLine().getReasonPhrase());
+                System.out.println("请求失败，原因是：" + response.getStatusLine().getReasonPhrase());
             }
         } catch (Exception e) {
             e.printStackTrace();
