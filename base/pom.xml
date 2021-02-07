@@ -56,6 +56,14 @@
         <!--        </dependency>-->
 
 
+        <!-- jetty -->
+        <dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty</artifactId>
+            <version>6.1.26</version>
+        </dependency>
+
+
         <!-- javax.xml.rpc-api -->
         <dependency>
             <groupId>javax.xml.rpc</groupId>

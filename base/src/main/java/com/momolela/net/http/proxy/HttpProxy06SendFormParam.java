@@ -23,7 +23,7 @@ public class HttpProxy06SendFormParam {
     public static void main(String[] args) throws Exception {
         CloseableHttpClient client = HttpClients.createDefault();
 
-        String url = "https://www.baidu.com";
+        String url = "http://10.0.38.178:9526/momolela/printName/"; // 这里必须要带上最后的 /，不然 post 请求失败
         HttpPost httpPost = new HttpPost(url);
 
         // 发送表单类型的 post 请求，Content-Type 默认是：application/x-www-form-urlencoded
@@ -43,7 +43,7 @@ public class HttpProxy06SendFormParam {
                 String s = EntityUtils.toString(entity);
                 System.out.println(s);
             } else {
-                System.out.println("请求失败，原因是：" + response.getStatusLine().getReasonPhrase());
+                System.out.println("请求失败，status 是: " + statusCode + "原因是: " + response.getStatusLine().getReasonPhrase());
             }
         } catch (Exception e) {
             e.printStackTrace();
