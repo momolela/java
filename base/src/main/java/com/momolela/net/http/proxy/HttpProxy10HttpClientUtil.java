@@ -49,7 +49,11 @@ public class HttpProxy10HttpClientUtil {
                 .build();
 
         /**
-         * 创建连接池，修改连接池配置
+         * common-httpclient 3.x 系列，连接池要使用如下配置
+         * this.httpClient = new HttpClient(new MultiThreadedHttpConnectionManager());
+         * this.httpClient.getHttpConnectionManager().getParams().setMaxTotalConnections(1000);
+         * ...
+         * 下面是使用 httpclient 4.5.x 系列去创建连接池，修改连接池配置
          */
         PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(registry);
         cm.setMaxTotal(50); // 连接池最大 50 个连接
