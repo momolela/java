@@ -19,7 +19,18 @@ import java.io.OutputStream;
  */
 public class HttpAccess01Jetty {
     public static void main(String[] args) throws Exception {
-        // 发布接口
+//        // jetty 也可以作为应用容器启动程序
+//        Server webServer = new Server();
+//        SelectChannelConnector connector = new SelectChannelConnector();
+//        connector.setPort(8080);
+//        webServer.setConnectors(new Connector[]{connector}); // 设置 connector
+//        WebAppContext webAppContext = new WebAppContext();
+//        webAppContext.setContextPath("/hai-node");
+//        webAppContext.setResourceBase("./src/main/webapp");
+//        webServer.setHandler(webAppContext); // 设置 handler
+//        webServer.start();
+
+        // jetty 使用 ContextHandler 发布 http 接口
         ContextHandler contextHandler = new ContextHandler();
         contextHandler.setContextPath("/momolela/printName"); // http://ip:port/momolela/printName/
         contextHandler.setHandler(new JettyHttpHandler());
