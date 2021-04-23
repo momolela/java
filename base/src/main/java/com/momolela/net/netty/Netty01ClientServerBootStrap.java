@@ -239,15 +239,15 @@ class HelloClientHandler extends SimpleChannelUpstreamHandler {
      * @param e
      * @throws Exception
      */
-    @Override
-    public void channelClosed(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception {
-        if (!initiativeClose) { // 被动断开链接
-            if (!(this.result instanceof Exception)) {
-                this.result = new String(resultByteArray);
-                callEnd();
-            }
-        }
-    }
+//    @Override
+//    public void channelClosed(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception {
+//        if (!initiativeClose) { // 被动断开链接
+//            if (!(this.result instanceof Exception)) {
+//                this.result = new String(resultByteArray);
+//                callEnd();
+//            }
+//        }
+//    }
 
     /**
      * 连接断开
@@ -332,6 +332,7 @@ class SyncHelloClientHandler extends HelloClientHandler {
      */
     @Override
     public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
+        System.out.println("开始接收服务端的数据");
         try {
             ChannelBuffer acceptBuff = (ChannelBuffer) e.getMessage();
             int oriLength = resultByteArray.length;
