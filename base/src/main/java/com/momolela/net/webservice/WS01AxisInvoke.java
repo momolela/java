@@ -44,7 +44,7 @@ public class WS01AxisInvoke {
         public Long call() {
             String soapAction = "http://ws.access.hai/";
             // 你的webservice地址
-            String endpoint = "http://10.8.2.73:9528/hai/WebServiceEntry?wsdl";
+            String endpoint = "http://10.0.38.23:9528/hai/WebServiceEntry?wsdl";
             Service service = new Service();
             try {
                 Call call = (Call) service.createCall();
@@ -70,12 +70,7 @@ public class WS01AxisInvoke {
                 call.addParameter("parameter", Constants.XSD_STRING, String.class, ParameterMode.IN);
 
                 long s = System.currentTimeMillis();
-                String result = (String) (call.invoke(new Object[]{"phportNotifyHospitalPatients", "", "", "POST /10.8.2.56:60023 HTTP/1.1\n" +
-                        "Content-Type:application/as-xml;\n" +
-                        "Content-Length:1249\n" +
-                        "Connection: Close\n" +
-                        "\n" +
-                        "<BSXml>  <MsgHeader>    <Organization>46640405-8</Organization>    <Sender>HIS</Sender>    <ServiceType>service</ServiceType>    <MsgType>ODS_03120005</MsgType>    <MsgVersion>3.3</MsgVersion>  </MsgHeader><MsgBody><as><method>phportNotifyHospitalPatients</method><seq>1</seq><params><hospitalCode>46640405-8</hospitalCode><hospitalName>创业智慧医院</hospitalName><patient><action>update</action><inpatientBrid>2659</inpatientBrid><triageNum></triageNum><triageTime>1900-01-01 00:00:00</triageTime><channelType>cs</channelType><triageLevel>1</triageLevel><triageArea>1</triageArea><inpatientNumber>1908000865</inpatientNumber ><outpatientNumber></outpatientNumber><arriveHospitalDate>2020-11-06 15:51:30</arriveHospitalDate><wristbandNum></wristbandNum><wristbandID></wristbandID><patientComplaint></patientComplaint><name>小金刚</name><age>9</age><sex>男</sex><borndate>2020-05-14 12:05:00</borndate><contactPhone></contactPhone><contactName>小金刚</contactName><identityType>身份证</identityType><identityNumber></identityNumber><bloodOxygen></bloodOxygen><pulse></pulse><bodyTemperature></bodyTemperature><breathe></breathe><bloodPressure></bloodPressure><alertness></alertness></patient><tid></tid><pid>1572</pid></params></as></MsgBody></BSXml>"}));
+                String result = (String) (call.invoke(new Object[]{"HL7CS", "", "", "1"}));
                 long e = System.currentTimeMillis();
                 System.out.println(result);
                 long cost = e - s;

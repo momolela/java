@@ -55,16 +55,25 @@ public class Collection01ArrayList {
         arr1.add("liuhuan");
         arr1.add("hufangyi");
         for (String s : arr1) {
-            arr0.add(s);
+            arr0.add(s); // 循环添加是深度拷贝，取交集不会影响 arr1
         }
         List<String> arr2 = new ArrayList<String>();
         arr2.add("sunzj");
         arr2.add("hehe");
         arr2.add("xixi");
-        arr0.retainAll(arr2);
-        System.out.println(arr0);
-        System.out.println(arr1);
-        System.out.println(arr2);
+        arr0.retainAll(arr2); // 取交集，结果在 arr0
+        System.out.println(arr0); // [sunzj]
+        System.out.println(arr1); // [sunzj, liuhuan, hufangyi]
+        System.out.println(arr2); // [sunzj, hehe, xixi]
+
+        /**
+         * subList
+         */
+        List<String> arrSub = new ArrayList<String>();
+        arrSub.add("sunzj");
+        arrSub.add("liuhuan");
+        arrSub.add("hufangyi");
+        System.out.println(arrSub.subList(1, 2)); // [liuhuan]
     }
 }
 
