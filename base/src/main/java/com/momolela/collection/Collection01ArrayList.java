@@ -67,6 +67,21 @@ public class Collection01ArrayList {
         System.out.println(arr2); // [sunzj, hehe, xixi]
 
         /**
+         * 差集
+         */
+        List<String> list1 = new ArrayList<String>();
+        list1.add("sunzj");
+        list1.add("liuhuan");
+        list1.add("hufangyi");
+        List<String> list2 = new ArrayList<String>();
+        list2.add("sunzj");
+        list2.add("liuhuan");
+//        List<String> reduce1 = list1.stream().filter(item -> !list2.contains(item)).collect(Collectors.toList());
+//        System.out.println(reduce1);
+        list1.removeAll(list2);
+        System.out.println(list1);
+
+        /**
          * subList
          */
         List<String> arrSub = new ArrayList<String>();
