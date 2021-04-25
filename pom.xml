@@ -15,6 +15,7 @@
         <module>jar</module>
         <module>util</module>
         <module>jvm</module>
+        <module>designPattern</module>
     </modules>
 
 
