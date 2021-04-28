@@ -10,6 +10,8 @@ import java.util.Arrays;
 public class IO22DecodeEncode {
 
     public static void main(String[] args) throws UnsupportedEncodingException {
+        System.out.println("我本机的文件编码是：" + System.getProperty("file.encoding"));
+
         String s = "你好";
 
         // 编码 utf-8
@@ -49,19 +51,26 @@ public class IO22DecodeEncode {
         System.out.println(Arrays.toString(bytes4));
         // 解码 utf-8
         String s4 = new String(bytes4, "utf-8");
-        System.out.println("s4 = " + s4); // 编码用 gbk 但解码用了 utf-8，然后下面用 utf-8 去编码，再用 gbk 去解码，还是不行的，gbk 和 utf-8 都支持中文，编码解码的过程会串；反过来是 ok 的
+        System.out.println("s4 = " + s4); // 编码用 gbk 但解码用了 utf-8；然后下面用 utf-8 去编码，再用 gbk 去解码，还是不行的；gbk 和 utf-8 都支持中文，编码解码的过程会串；反过来是 ok 的
         bytes4 = s4.getBytes("utf-8");
         s4 = new String(bytes4, "gbk");
         System.out.println("s4 = " + s4);
 
         /**
          * 记事本联通问题
-         * 1、用 gbk 或者 gb312 存 “联通” 两个字
+         * 1、用 gbk 或者 gb2312 存 “联通” 两个字
          * 2、保存关闭
          * 3、重新打开，发现乱码了
          *
          * 因为 “联通” 两个字，转成二进制之后，他的编码标识头被解析成了 utf-8，所以他3个字节3个字节解码文件，就乱码了，其实他是用 gbk 或者 gb312 存的
          */
+
+        String xin = "♥";
+        byte[] bytes5 = xin.getBytes("gbk");
+        String s5 = new String(bytes5, "gbk");
+        System.out.println("s5 = " + s5);
+
+
     }
 
 }
