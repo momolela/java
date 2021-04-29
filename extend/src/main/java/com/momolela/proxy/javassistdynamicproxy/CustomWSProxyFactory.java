@@ -45,9 +45,11 @@ public class CustomWSProxyFactory {
         ClassPool classPool = ClassPool.getDefault();
         classPool.insertClassPath(new ClassClassPath(CustomWSClass.class));
 
-        // 创建自定义代理类
-        CtClass customClassProxy = classPool.makeClass("CustomWSClassProxy$" + INCREMENT.incrementAndGet());
+        // 创建自定义代理类，有 makeClass 方法的地方才是最终生成的代理类
+        CtClass customClassProxy = classPool.makeClass("CustomWSClassProxy" + INCREMENT.incrementAndGet());
         try {
+//            // 也可以设置实现的接口
+//            customClassProxy.setInterfaces();
             // 设置父类
             customClassProxy.setSuperclass(classPool.get("java.lang.Object"));
             // 设置属性
@@ -76,7 +78,7 @@ public class CustomWSProxyFactory {
             Class clazz = customClassProxy.toClass();
             soapBindingAno(clazz);
             Constructor cons = clazz.getConstructor();
-            return cons.newInstance();
+            return cons.newInstance(); // 通过空构造函数创建代理类
         } catch (CannotCompileException e) {
             throw new IllegalArgumentException("创建代理类时编译异常", e);
         } catch (NotFoundException e) {
@@ -99,7 +101,7 @@ public class CustomWSProxyFactory {
 //        String modifiers = fieldInfo.getModifiers();// 字段修饰符
         CtField ctField = new CtField(fieldType, fieldName, customClassProxy);
         ctField.setModifiers(Modifier.PRIVATE);// 设置访问修饰符
-//        customClassProxy.addField(fieldName, CtField.Initializer.constant("sunzj")); // 添加 name 字段，赋值为 sunzj
+//        customClassProxy.addField(ctField, CtField.Initializer.constant("sunzj")); // 给字段，赋值默认值为 sunzj
         customClassProxy.addField(ctField); // 添加name字段
         // setName getName方法
         customClassProxy.addMethod(CtNewMethod.setter("set" + captureName(fieldName), ctField));
