@@ -48,6 +48,18 @@ public class System01Base {
         Object o = new Object();
         System.out.println(o); // 用了 String.valueOf 可以避免空指针的问题
         System.out.println(o.toString()); // o 可能空指针
+
+
+        // System.out 是标准输出流；
+        // 不是直接输出，会将输出信息先缓存，然后按顺序输出
+        System.out.println(1);
+        System.out.println(2);
+        System.out.println(3);
+        System.out.println(4);
+        // System.err 是标准错误输出流；
+        // 只要执行立即输出，不会缓存，所以 5 可能混在 1 2 3 4 里面
+        // 在调试程序的时候可以用，有红色提示
+        System.err.println(5);
     }
 
 }

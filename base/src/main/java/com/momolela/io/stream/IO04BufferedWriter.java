@@ -21,7 +21,7 @@ public class IO04BufferedWriter {
             bufferedWriter.flush();
         }
 
-        // 关闭缓冲区资源即可，也直接关闭了流资源
+        // 关闭缓冲区资源即可，看源码，里面也直接关闭了传入的流资源 fw
         bufferedWriter.close();
     }
 
