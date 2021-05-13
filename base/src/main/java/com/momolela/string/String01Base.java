@@ -27,7 +27,7 @@ public class String01Base {
         Map<String, Object> test = new HashMap<>();
         String testStr = (String) test.get("test");
 //        System.out.println(testStr.getClass()); // 这里会报空指针异常，因为 testStr 还是为 null
-        System.out.println(testStr);  // 打印的是 null
+        System.out.println(testStr);  // null
         System.out.println(StringUtils.isEmpty(testStr)); // true
     }
 }
