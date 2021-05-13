@@ -51,6 +51,7 @@ public class Integer01 {
 
 
         // 对于两个非 new 生成的 Integer 对象，进行比较时，如果两个变量的值在区间-128~127之间，则比较结果为 true ，如果两个变量的值不在此区间，则比较结果为 false
+        // Integer 内部有一个内部类 IntegerCache
         Integer h1 = 128;
         Integer h2 = 128;
         System.out.println(h1 == h2); // false

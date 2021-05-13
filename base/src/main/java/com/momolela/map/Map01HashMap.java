@@ -75,7 +75,7 @@ public class Map01HashMap {
         hashMap.put(new HashMapStudent("hufy", 24), "江西");
         hashMap.put(new HashMapStudent("liuh", 26), "北京");
 
-        // 第一种遍历方式
+        // 第一种遍历方式，这种遍历效率较低，拿到 key 之后，要通过 key 去 hashmap 的数据结构中找数据
         Set<HashMapStudent> students = hashMap.keySet();
         Iterator<HashMapStudent> it1 = students.iterator();
         while (it1.hasNext()) {
@@ -83,7 +83,7 @@ public class Map01HashMap {
             System.out.println(next1.getName() + "是" + next1.getAge() + "岁");
         }
 
-        // 第二种遍历方式
+        // 第二种遍历方式，这种遍历效率更高
         Set<Map.Entry<HashMapStudent, String>> entrySet = hashMap.entrySet();
         Iterator<Map.Entry<HashMapStudent, String>> it2 = entrySet.iterator();
         while (it2.hasNext()) {
