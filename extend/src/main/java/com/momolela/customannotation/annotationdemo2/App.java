@@ -17,19 +17,33 @@ class LoginVerifyMapping {
 }
 
 class Test {
+    private Boolean isLogin = Boolean.FALSE;
 
     @LoginVerify
     public void read() {
-        System.out.println("开始读取文件...");
+        if (LoginVerifyMapping.getFaceFunctionIsNeedLoginVerify("com.momolela.customannotation.annotationdemo2.Test.read") == Boolean.TRUE) {
+            if (isLogin == Boolean.TRUE) {
+                System.out.println("开始读取文件...");
+            } else {
+                System.out.println("请先登录...");
+            }
+        }
     }
 
     @LoginVerify
     public void write() {
-        System.out.println("开始写入文件...");
+        if (LoginVerifyMapping.getFaceFunctionIsNeedLoginVerify("com.momolela.customannotation.annotationdemo2.Test.read") == Boolean.TRUE) {
+            if (isLogin == Boolean.TRUE) {
+                System.out.println("开始写入文件...");
+            } else {
+                System.out.println("请先登录...");
+            }
+        }
     }
 
     public void login() {
         System.out.println("登录成功...");
+        isLogin = Boolean.TRUE;
     }
 }
 
