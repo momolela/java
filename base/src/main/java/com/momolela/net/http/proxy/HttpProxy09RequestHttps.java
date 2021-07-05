@@ -40,7 +40,8 @@ public class HttpProxy09RequestHttps {
         HttpClientBuilder httpClientBuilder = HttpClients.custom().setConnectionManager(connectionManager);
         CloseableHttpClient client = httpClientBuilder.build();
 
-        String url = "https://localhost:8090/test/haha"; // 正常情况下，去访问这个地址，因为 https 是不安全的，会报错
+//        String url = "https://localhost:8090/test/haha"; // 正常情况下，去访问这个地址，因为 https 是不安全的，会报错
+        String url = "https://test.51trust.com/gateway/oauth/authorize/?clientId=2017070411003376&responseType=code";
         HttpPost httpPost = new HttpPost(url);
         CloseableHttpResponse response = null;
         try {
