@@ -60,6 +60,12 @@ public class System01Base {
         // 只要执行立即输出，不会缓存，所以 5 可能混在 1 2 3 4 里面
         // 在调试程序的时候可以用，有红色提示
         System.err.println(5);
+
+
+        // 毫秒值
+        System.out.println(System.currentTimeMillis());
+        // 纳秒值
+        System.out.println(System.nanoTime());
     }
 
 }
