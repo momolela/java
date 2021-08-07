@@ -30,9 +30,9 @@ public class KeyUtils {
 
 
         Map<String,Object> params = new HashMap<>();
-        params.put("SourceId", "1519683");
-        params.put("AuthorOrganization", "E7683863-7");
-        params.put("RecordClassifying", "HealthEventsSummary");
+        params.put("SourceId", "");
+        params.put("AuthorOrganization", "");
+        params.put("RecordClassifying", "TransfusionRecord");
         System.out.println(generateDcId(params));
     }
 

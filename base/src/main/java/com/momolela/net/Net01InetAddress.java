@@ -11,7 +11,7 @@ public class Net01InetAddress {
 
     private static void getLocalHost() throws UnknownHostException {
         InetAddress localHost = InetAddress.getLocalHost();
-        System.out.println(localHost.getHostAddress());
+        System.out.println("canonicalHostName：" + localHost.getCanonicalHostName());
         System.out.println("hostName：" + localHost.getHostName());
         System.out.println("hostAddress：" + localHost.getHostAddress());
     }

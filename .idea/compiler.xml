@@ -7,9 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="base" />
+        <module name="jvm" />
+        <module name="designPattern" />
         <module name="concurrent" />
+        <module name="util" />
+        <module name="base" />
         <module name="extend" />
+        <module name="jar" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />
