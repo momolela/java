@@ -7,7 +7,7 @@ import java.util.TreeSet;
 public class Generic02InComparator {
     public static void main(String[] args) {
 
-        TreeSet<String> treeSet = new TreeSet<String>(new LenComparator()); // 创建TreeSet的时候传入比较器
+        TreeSet<String> treeSet = new TreeSet<String>(new LenComparator()); // 创建 TreeSet 的时候传入比较器
         treeSet.add("ght");
         treeSet.add("ddfd");
         treeSet.add("cgdfd");
@@ -23,8 +23,8 @@ public class Generic02InComparator {
 }
 
 /**
- * 比较器类，里面就用了泛型<String>，
- * 所以在实现compare方法时，就需要指定参数为String类型
+ * 比较器类，里面就用了泛型 <String>，
+ * 所以在实现 compare 方法时，就需要指定参数为 String 类型
  * 接口其实就是 Comparator<T>，在定义接口的时候，全程用的泛型 T
  */
 class LenComparator implements Comparator<String> {

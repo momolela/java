@@ -24,9 +24,10 @@ class GenericMethods<T> {
     }
 
 
-//    public static void staticMethod(T t) {
-//        System.out.println("static methods:" + t);
-//    }
+    // 会报错，静态方法不能用类上定义的泛型，因为类上的泛型只有在 new 对象的时候才有，但是静态方法先于对象存在
+    //public static void staticMethod(T t) {
+    //    System.out.println("static methods:" + t);
+    //}
 
     /**
      * 上面注释的代码会报错，静态方法不能用类上定义的泛型，因为类上的泛型只有在 new 对象的时候才有，但是静态方法先于对象存在
