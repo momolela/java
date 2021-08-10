@@ -1,7 +1,7 @@
 package com.momolela.generic;
 
 /**
- * 以前的做法，统一定义成Object，让所有的对象都可被接收
+ * 以前的做法，统一定义成 Object，让所有的对象都可被接收
  */
 class UtilsBefore {
     private Object tool;

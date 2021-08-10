@@ -6,6 +6,7 @@ import sun.misc.BASE64Encoder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class IO16FileBase64Transform {
 
@@ -53,12 +54,34 @@ public class IO16FileBase64Transform {
         out.close();
     }
 
+    /**
+     * 文本分割
+     * @throws IOException
+     */
+    private static void textSplit() throws IOException {
+        File file = new File("D:\\fileBase64.txt");
+        FileInputStream fileInputStream = new FileInputStream(file);
+        byte[] buffer = new byte[1024 * 1024]; // 1M
+        int num = 0, part = 1, size = 10; // 就是 10 个 1M，按照 10M 分割
+        while (true) {
+            FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\file-base64-part-" + (part++) + ".txt"));
+            for (int i = 0; i < size; i++) {
+                if ((num = fileInputStream.read(buffer)) != -1) {
+                    fileOutputStream.write(buffer, 0, num);
+                } else {
+                    return; // 退出所有循环
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         try {
-            String base64Code = encodeBase64File("C:\\Users\\Administrator\\Desktop\\WorkNode.class");
-            System.out.println(base64Code);
-            decoderBase64File(base64Code, "D:\\22.xls");
-            toFile(base64Code, "D:\\three.txt");
+            String base64Code = encodeBase64File("C:\\Users\\Administrator\\Desktop\\HZJLDocGetter.class"); // 将文件转成 base64 码
+            //System.out.println(base64Code);
+            //decoderBase64File(base64Code, "D:\\hai-cnode-3.2.war");
+            toFile(base64Code, "D:\\fileBase64.txt"); // 将 base64 码写入到文件
+            //textSplit(); // 切割大文件
         } catch (Exception e) {
             e.printStackTrace();
         }
