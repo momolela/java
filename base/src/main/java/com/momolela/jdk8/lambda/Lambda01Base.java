@@ -6,18 +6,18 @@ public class Lambda01Base {
 
         // lambda 表达式免去了使用匿名方法的麻烦
 
-        // 参数类型声明
+        // 参数类型声明，可以通过 Lambda 表达式来创建该接口的对象
         MathOperation addition = (int a, int b) -> a + b;
 
-        // 不声明参数类型
+        // 不声明参数类型，可以通过 Lambda 表达式来创建该接口的对象
         MathOperation subtraction = (a, b) -> a - b;
 
-        // 大括号中的返回语句
+        // 大括号中的返回语句，可以通过 Lambda 表达式来创建该接口的对象
         MathOperation multiplication = (int a, int b) -> {
             return a * b;
         };
 
-        // 没有大括号及返回语句
+        // 没有大括号及返回语句，可以通过 Lambda 表达式来创建该接口的对象
         MathOperation division = (int a, int b) -> a / b;
 
         // 测试
