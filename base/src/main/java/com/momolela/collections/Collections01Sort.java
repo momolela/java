@@ -28,6 +28,7 @@ public class Collections01Sort {
         Collections.sort(arrayList1);
         System.out.println("通过存入对象本身具备的比较性去排序，排序后是：" + arrayList1);
 
+
         ArrayList<String> arrayList2 = new ArrayList<String>();
         arrayList2.add("hrg");
         arrayList2.add("asdf");

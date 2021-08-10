@@ -17,7 +17,7 @@ import java.util.concurrent.Future;
 public class WS01AxisInvoke {
 
     public static void main(String[] args) {
-        int total = 1;
+        int total = 10;
         long totalCost = 0;
         ExecutorService threadPool = Executors.newFixedThreadPool(200);
         List<Future> futureList = new ArrayList<>();
@@ -44,7 +44,7 @@ public class WS01AxisInvoke {
         public Long call() {
             String soapAction = "http://ws.access.hai/";
             // 你的webservice地址
-            String endpoint = "http://10.0.38.23:9528/hai/WebServiceEntry?wsdl";
+            String endpoint = "http://192.168.0.186:9528/hai/WebServiceEntry?wsdl";
             Service service = new Service();
             try {
                 Call call = (Call) service.createCall();
@@ -70,7 +70,19 @@ public class WS01AxisInvoke {
                 call.addParameter("parameter", Constants.XSD_STRING, String.class, ParameterMode.IN);
 
                 long s = System.currentTimeMillis();
-                String result = (String) (call.invoke(new Object[]{"HL7CS", "", "", "1"}));
+                String result = (String) (call.invoke(new Object[]{"EMRDocumentRetrieve", "", "", "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                        "<BSXml>\n" +
+                        "  <MsgHeader>\n" +
+                        "    <Sender>HIS</Sender>\n" +
+                        "    <MsgType>CDR_0103</MsgType>\n" +
+                        "    <MsgVersion>3.0</MsgVersion>\n" +
+                        "  </MsgHeader>\n" +
+                        "  <Document>\n" +
+                        "    <DocId>ee05c3e0f87c4db3b3f39c08e9181c46</DocId>\n" +
+                        "    <DocCode>PatientBasicInfo</DocCode>\n" +
+                        "    <DocFormat>02</DocFormat>\n" +
+                        "  </Document>\n" +
+                        "</BSXml>\n"}));
                 long e = System.currentTimeMillis();
                 System.out.println(result);
                 long cost = e - s;
@@ -82,5 +94,4 @@ public class WS01AxisInvoke {
             return null;
         }
     }
-
 }
