@@ -8,6 +8,10 @@ package com.momolela.jdk8.lambda;
  */
 public class Lambda04UseCase3 {
     public static void main(String[] args) {
+
+
+        // 这里面并不需要显式地把它转成一个 Runnable 参数，因为 Java 能根据上下文自动推断出来：
+        // 一个 Thread 的构造函数接受一个 Runnable 参数，而传入的 lambda 表达式正好符合其 run() 函数，所以 Java 编译器推断它为 Runnable。
         Thread t = new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 System.out.println(2 + ":" + i);
