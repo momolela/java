@@ -1,7 +1,7 @@
 package com.momolela.jdk8.lambda;
 
 class Item {
-    public Item(int i, String s, double v) {
+    public Item(int id, String name, double price) {
     }
 
     public Item() {
