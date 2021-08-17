@@ -34,17 +34,15 @@ public class Lambda07UseCase6 {
         list.add(new Item07(14, "风衣", 139.80));
         list.add(new Item07(12, "秋裤", 55.33));
 
-        /*
-        list.sort(new Comparator<Item>() {
-            @Override
-            public int compare(Item o1, Item o2) {
-                return o1.getId()  - o2.getId();
-            }
-        });
-        */
+        //list.sort(new Comparator<Item07>() {
+        //    @Override
+        //    public int compare(Item07 o1, Item07 o2) {
+        //        return o1.getId()  - o2.getId();
+        //    }
+        //});
 
-        // list.sort(Comparator.comparingInt(Item07::getId));
-        list.sort((o1, o2) -> o1.getId() - o2.getId());
+        //list.sort((o1, o2) -> o1.getId() - o2.getId());
+        list.sort(Comparator.comparingInt(Item07::getId));
 
         System.out.println(list);
     }

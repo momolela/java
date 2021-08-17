@@ -20,8 +20,9 @@ class Item06 {
 
 /**
  * 删除集合中的某个元素
- * <p>
- * 我们通过public boolean removeIf(Predicate<? super E> filter)方法来删除集合中的某个元素，Predicate 也是 jdk 为我们提供的一个函数式接口，可以简化程序的编写
+ *
+ * 我们通过 public boolean removeIf(Predicate<? super E> filter) 方法来删除集合中的某个元素
+ * Predicate 也是 jdk 为我们提供的一个函数式接口，可以简化程序的编写
  */
 public class Lambda06UseCase5 {
     public static void main(String[] args) {

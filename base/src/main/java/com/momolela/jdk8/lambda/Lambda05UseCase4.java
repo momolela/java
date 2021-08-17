@@ -4,14 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * 接口
- */
-@FunctionalInterface
-interface Consumer<T> {
-    void accept(T t);
-}
-
-/**
  * 遍历集合
  * 我们可以调用集合的 public void forEach(Consumer<? super E> action) 方法，
  * 通过 lambda 表达式的方式遍历集合中的元素。
@@ -25,9 +17,13 @@ public class Lambda05UseCase4 {
 
         Collections.addAll(list, 1, 2, 3, 4, 5);
 
-        //lambda表达式 方法引用
+        // lambda 表达式 方法引用
+        //list.forEach(element -> {
+        //    System.out.println(element);
+        //});
         list.forEach(System.out::println);
 
+        // lambda 表达式遍历
         list.forEach(element -> {
             if (element % 2 == 0) {
                 System.out.println(element);
