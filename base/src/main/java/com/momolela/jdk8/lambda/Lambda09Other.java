@@ -78,6 +78,11 @@ public class Lambda09Other {
         //    }
         //}
 
+        //@FunctionalInterface
+        //public interface Supplier<T> {
+        //    T get();
+        //}
+
 
         // 其他的应用
         // 嵌套的λ表达式
