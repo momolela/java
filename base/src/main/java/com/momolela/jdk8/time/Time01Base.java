@@ -51,18 +51,18 @@ public class Time01Base {
             System.out.println("今年不是闰年");
         }
 
-        // localDate 格式化日期
+        // localDate 格式化成日期
         // 在 java8 之前，时间日期的格式化非常麻烦，经常使用 SimpleDateFormat 来进行格式化，但是 SimpleDateFormat 并不是线程安全的
         // 在 java8 中，引入了一个全新的线程安全的日期与时间格式器。并且预定义好了格式。比如，本例中使用的 BASIC_ISO_DATE 格式会将 19951101 格式化成 1995-11-01
         // 在 DateTimeFormatter 中还有很多定义好的格式
         System.out.println(LocalDate.parse("19951101", DateTimeFormatter.BASIC_ISO_DATE)); // 1995-11-01
 
-        // LocalDate 按照自己定义的格式格式化日期
+        // LocalDate 按照自己定义的格式格式化成日期
         // DateTimeFormatter.ofPattern 可以自定义自己要输出的格式
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM dd yyyy");
         System.out.println(LocalDate.parse("11 01 1995", dateTimeFormatter)); // 1995-11-01
 
-        // localDateTime 时间转成字符串
+        // localDateTime 日期时间转成字符串
         DateTimeFormatter dateTimeFormatter1 = DateTimeFormatter.ofPattern("MM dd yyyy HH:mm a");
         System.out.println(dateTimeFormatter1.format(LocalDateTime.now())); // 08 24 2021 23:03 下午
 
@@ -107,22 +107,27 @@ public class Time01Base {
         // 计算两个小时后的时间
         System.out.println("两个小时后是：" + nowTime.plusHours(2));
 
-        // 解析时间
+        // 解析成时间
         LocalTime date5 = LocalTime.parse("20:15:30");
         System.out.println("date5: " + date5);
 
 
         // ---------- LocalDateTime
         // 日期时间
-        // 日期时间转日期，也可以转时间
+        // toLocalDate() 日期时间转日期，
+        // toLocalTime() 也可以转时间
         LocalDateTime nowDateTime = LocalDateTime.now();
         System.out.println(nowDateTime.toLocalDate());
 
 
         // ---------- Clock
         // 时钟
-        System.out.println("当前的时区是：" + Clock.systemUTC());
-        System.out.println("当前的时区是：" + Clock.systemDefaultZone());
+        Clock systemUTC = Clock.systemUTC();
+        Instant instant = systemUTC.instant();
+        ZonedDateTime time = instant.atZone(systemUTC.getZone());
+        System.out.println("UTC 的时区日期时间，时区是：" + time);
+        Clock systemDefaultZone = Clock.systemDefaultZone();
+        System.out.println("当前的时区是：" + systemDefaultZone);
 
 
         // ---------- zoneId
