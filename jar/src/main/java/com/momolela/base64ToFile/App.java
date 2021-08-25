@@ -23,7 +23,7 @@ public class App {
         String base64CodeLine = null;
         while ((base64CodeLine = bufferedReader.readLine()) != null) {
             sb.append(base64CodeLine);
-            if (System.getProperty("os.name").indexOf("Windows") !=-1) {
+            if (System.getProperty("os.name").contains("Windows")) {
                 sb.append("\r\n");
             } else {
                 sb.append("\n");
