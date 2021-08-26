@@ -16,6 +16,7 @@
         <module>util</module>
         <module>jvm</module>
         <module>designPattern</module>
+        <module>java9NewFeatures</module>
     </modules>
 
 
