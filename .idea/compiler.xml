@@ -7,19 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="java9NewFeatures" />
         <module name="jvm" />
-        <module name="designPattern" />
-        <module name="concurrent" />
-        <module name="util" />
-        <module name="base" />
         <module name="extend" />
+        <module name="java9NewFeatures" />
+        <module name="util" />
+        <module name="concurrent" />
+        <module name="designPattern" />
         <module name="jar" />
+        <module name="base" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
       <module name="java9Modular" target="9" />
-      <module name="java9ModuleTest" target="9" />
+      <module name="java9Test" target="9" />
     </bytecodeTargetLevel>
   </component>
 </project>
