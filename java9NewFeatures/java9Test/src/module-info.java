@@ -1,4 +1,4 @@
-module java9ModuleTest{
+module java9Test{
     requires java9Module;
     requires java.logging;
 }
