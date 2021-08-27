@@ -3,13 +3,41 @@ package com.momolela.jdk8.defaultmethod;
 interface TestInterface1 {
     default void test() {
         System.out.println("TestInterface1");
+        testThen();
     }
+
+    // java8 支持接口中定义静态方法（需要提供默认实现），写法上将默认方法的 default 关键字换成 static 关键字即可。
+    static void testThen() {
+        System.out.println("TestInterface1 testThen");
+    }
+
+    // // java9 才支持接口中定义私有方法和私有静态方法
+    // private void testAfter() {
+    //
+    // }
+    // private static void testAfter() {
+    //
+    // }
 }
 
 interface TestInterface2 {
     default void test() {
         System.out.println("TestInterface2");
+        testThen();
     }
+
+    // java8 支持接口中定义静态方法（需要提供默认实现），写法上将默认方法的 default 关键字换成 static 关键字即可。
+    static void testThen() {
+        System.out.println("TestInterface2 testThen");
+    }
+
+    // // java9 才支持接口中定义私有方法和私有静态方法
+    // private void testAfter() {
+    //
+    // }
+    // private static void testAfter() {
+    //
+    // }
 }
 
 
@@ -41,8 +69,10 @@ public class DefaultMethod01Base implements TestInterface1, TestInterface2 {
     //    TestInterface1.super.test();
     //}
 
-    // java8 支持接口中定义静态方法（需要提供默认实现），写法上将默认方法的default关键字换成static关键字即可。
-    static void test1() {
-        System.out.println("haha");
+
+    public static void main(String[] args) {
+        DefaultMethod01Base defaultMethod01Base = new DefaultMethod01Base();
+        defaultMethod01Base.test();
     }
+
 }
