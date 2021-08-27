@@ -128,11 +128,16 @@ public class Stream01Base {
         bookList.add(new Book("haha", 234));
         bookList.add(new Book("xixi", 123));
         bookList.add(new Book("keke", 456));
+        bookList.add(new Book("keke", 456));
         List<Book> result82 = bookList.stream().distinct().collect(Collectors.toList());
         System.out.println(result82);
         // --- 通过对象属性对对象数组去重，自定义方法 distinctByKey
-        List<Book> result83 = bookList.stream().filter(distinctByKey(b -> b.getName())).collect(Collectors.toList());
+        List<Book> result83 = bookList.stream().filter(distinctByKey(b -> b.getName() + "#" + b.getPrice())).collect(Collectors.toList());
         System.out.println(result83);
+        // collectingAndThen 是先归约，然后再转换成 ArrayList
+        List<Book> result84 = bookList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(
+                Comparator.comparing(b -> b.getName() + "#" + b.getPrice()))), ArrayList::new));
+        System.out.println(result84);
         System.out.println("========== 8");
 
 
