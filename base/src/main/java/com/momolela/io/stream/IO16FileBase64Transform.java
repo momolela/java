@@ -77,10 +77,10 @@ public class IO16FileBase64Transform {
 
     public static void main(String[] args) {
         try {
-            String base64Code = encodeBase64File("C:\\Users\\Thinkpad\\Desktop\\hai-sdk-3.2-SNAPSHOT.jar"); // 将文件转成 base64 码
+            String base64Code = encodeBase64File("C:\\Users\\Thinkpad\\Desktop\\basejar.zip"); // 将文件转成 base64 码
             //System.out.println(base64Code);
             //decoderBase64File(base64Code, "D:\\hai-cnode-3.2.war");
-            toFile(base64Code, "D:\\fileBase64.txt"); // 将 base64 码写入到文件
+            toFile(base64Code, "C:\\Users\\Thinkpad\\Desktop\\fileBase64.txt"); // 将 base64 码写入到文件
             //textSplit(); // 切割大文件
         } catch (Exception e) {
             e.printStackTrace();
