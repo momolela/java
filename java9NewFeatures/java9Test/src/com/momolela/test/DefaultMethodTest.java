@@ -1,4 +1,4 @@
-package com.momolela.defaultmethod;
+package com.momolela.test;
 
 
 /**
@@ -64,7 +64,7 @@ interface interfaceTest2 {
 }
 
 
-public class DefaultMethod01Base implements interfaceTest1, interfaceTest2 {
+public class DefaultMethodTest implements interfaceTest1, interfaceTest2 {
 
     @Override
     public void test() {
@@ -77,7 +77,7 @@ public class DefaultMethod01Base implements interfaceTest1, interfaceTest2 {
     }
 
     public static void main(String[] args) {
-        DefaultMethod01Base defaultMethod01Base = new DefaultMethod01Base();
+        DefaultMethodTest defaultMethod01Base = new DefaultMethodTest();
         defaultMethod01Base.testDefault();
     }
 }
