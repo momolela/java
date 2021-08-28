@@ -41,17 +41,22 @@ public class Lambda09Other {
 
         // jdk 中提供的一些 函数式接口
         //@FunctionalInterface
-        //public interface Function<T, R> {
+        //public interface Function<T, R> { // 函数型接口
         //    R apply(T t);
         //}
 
         //@FunctionalInterface
-        //public interface Consumer<T> {
+        //public interface Consumer<T> { // 消费型接口
         //    void accept(T t);
         //}
 
         //@FunctionalInterface
-        //public interface Predicate<T> {
+        //public interface Supplier<T> { // 供给型接口
+        //    T get();
+        //}
+
+        //@FunctionalInterface
+        //public interface Predicate<T> { // 断言型接口
         //    boolean test(T t);
         //}
 
@@ -76,11 +81,6 @@ public class Lambda09Other {
         //    static <T> java.util.function.UnaryOperator<T> identity() {
         //        return t -> t;
         //    }
-        //}
-
-        //@FunctionalInterface
-        //public interface Supplier<T> {
-        //    T get();
         //}
 
 

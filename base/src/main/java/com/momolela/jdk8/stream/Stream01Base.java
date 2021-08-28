@@ -172,6 +172,7 @@ public class Stream01Base {
 
 
         // reduce
+        // 归约
         // --- 接受的参数是 Optional<T> reduce(BinaryOperator<T> accumulator);
         // a 是累计的结果，b 是新的值
         // 返回的是 Optional
@@ -214,7 +215,8 @@ public class Stream01Base {
 
 
         // collect
-        // collect()方法的参数为一个java.util.stream.Collector类型对象，可以用java.util.stream.Collectors工具类提供的静态方法来生成，Collectors类实现很多的归约操作，如Collectors.toList()、Collectors.toSet()、Collectors.joining()（joining适用于字符串流）等
+        // 收集
+        // collect() 方法的参数为一个 java.util.stream.Collector 类型对象，可以用 java.util.stream.Collectors 工具类提供的静态方法来生成，Collectors 类实现很多的归约操作，如Collectors.toList()、Collectors.toSet()、Collectors.joining()（joining适用于字符串流）等
         // --- Collectors.toList() 转成 List
         List<Integer> numbers151 = Arrays.asList(-1, -2, 0, 4, 5);
         List<Integer> absList151 = numbers151.stream().map(n -> Math.abs(n)).collect(Collectors.toList());
