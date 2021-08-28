@@ -4,6 +4,9 @@ import com.momolela.bean.Person;
 
 import java.util.logging.Logger;
 
+/**
+ * java9 开始支持模块化操作
+ */
 public class ModuleTest {
 
     private static final Logger LOGGER = Logger.getLogger("ModuleTest");
