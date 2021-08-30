@@ -19,7 +19,7 @@ class Thread01ExtendsThreadDemo extends Thread {
 public class Thread01ExtendsThread {
     public static void main(String[] args) {
         Thread01ExtendsThreadDemo thread01ExtendsThreadDemo = new Thread01ExtendsThreadDemo();
-        thread01ExtendsThreadDemo.run(); // 不开启线程，只执行run方法
+        // thread01ExtendsThreadDemo.run(); // 不开启线程，只执行run方法
         thread01ExtendsThreadDemo.start(); // 开启线程，并且执行run方法
 
         for (int i = 0; i < 1000; i++) {
