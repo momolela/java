@@ -39,6 +39,14 @@ class Thread09LockStopDemo implements Runnable {
 
 public class Thread09LockStop {
     public static void main(String[] args) {
+        // interrupt() 可以打断 wait、sleep
+        // interruptThread();
+
+        // interrupt() 还可以打断 LockSupport.park();
+        interruptPark();
+    }
+
+    public static void interruptThread() {
         Thread09LockStopDemo thread09LockStopDemo1 = new Thread09LockStopDemo();
         Thread09LockStopDemo thread09LockStopDemo2 = new Thread09LockStopDemo();
         Thread t1 = new Thread(thread09LockStopDemo1, "thread1");
@@ -54,15 +62,10 @@ public class Thread09LockStop {
         // thread09LockStopDemo.changeFlag();
         t1.interrupt(); // 线程通过wait()，join()，sleep()都会进入冻结状态，interrupt()可以是线程复活，但是会出现InterruptedException异常
         t2.interrupt(); // 线程通过wait()，join()，sleep()都会进入冻结状态，interrupt()可以是线程复活，但是会出现InterruptedException异常
-
-
-        // interrupt() 还可以打断 LockSupport.park();
-        interruptPark();
-
     }
 
     public static void interruptPark() {
-        Thread t = new Thread(() -> {
+        Thread myThread = new Thread(() -> {
             System.out.println("park...");
             LockSupport.park(); // 这里执行后会阻塞
             System.out.println("unPark");
@@ -72,14 +75,13 @@ public class Thread09LockStop {
             System.out.println("unPark");
         }, "myThread");
 
-        t.start();
+        myThread.start();
 
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        // t.interrupt();
-
+        myThread.interrupt();
     }
 }

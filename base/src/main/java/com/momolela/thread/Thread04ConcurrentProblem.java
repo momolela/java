@@ -1,5 +1,6 @@
 package com.momolela.thread;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -35,13 +36,126 @@ class Thread04ConcurrentProblemDemo implements Runnable {
     }
 }
 
+class Room {
+    int count = 0;
+
+    // 静态函数上加上 synchronized 相当于锁住的是类对象
+    // public synchronized static void test() {
+    //     System.out.println("test");
+    // }
+    // public static void test() {
+    //     synchronized (Room.class) {
+    //         System.out.println("test");
+    //     }
+    // }
+
+    // 相当于这样写，也是锁的 this 对象
+    // public synchronized void increment() {
+    //     count++;
+    // }
+    public void increment() {
+        synchronized (this) {
+            count++; // 成员变量，被共享了，且有被修改操作，所以要考虑线程安全问题，局部变量一般不会出现线程安全问题
+        }
+    }
+
+    public void decrement() {
+        synchronized (this) {
+            count--; // 成员变量，被共享了，且有被修改操作，所以要考虑线程安全问题，局部变量一般不会出现线程安全问题
+        }
+    }
+
+    public int getCount() {
+        synchronized (this) {
+            return count;
+        }
+    }
+}
+
+class ThreadSafe {
+    public void method1(int loopNumber) {
+        // 这里作为局部变量，调用 method2，method3 也是线程安全的
+        // 如果 method2，method3 用 public 修饰，也是线程安全的，因为外面进来的 list 也不是 method1 中的局部变量，要线程安全问题，必须是共享资源
+        // 如果被 public 修饰了，说明可以被子类重写了，如 ThreadSafeSubClass 中的 method3，method1 中调用method3 导致 list 又被共享了，这样就会导致线程安全问题
+        // 所以修饰符是有效可以控制线程安全的，还有 final，也是开闭原则的闭
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < loopNumber; i++) {
+            method2(list);
+            method3(list);
+        }
+    }
+
+    // private void method2(ArrayList<String> list) {
+    //     list.add("0");
+    // }
+    public void method2(ArrayList<String> list) {
+        list.add("0");
+    }
+
+    // private void method3(ArrayList<String> list) {
+    //     list.remove(0);
+    // }
+    public void method3(ArrayList<String> list) {
+        list.remove(0);
+    }
+
+
+}
+
+class ThreadSafeSubClass extends ThreadSafe {
+    @Override
+    public void method3(ArrayList<String> list) {
+        new Thread(() -> {
+            list.remove(0);
+        }).start();
+    }
+}
+
 public class Thread04ConcurrentProblem {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        // synchronized 简单使用
+        // synchronizedUse();
+
+        // synchronized 面向对象优化
+        // synchronizedOptimize();
+
+        // 局部变量一般情况下是线程安全的，但局部变量引用的对象则未必，如果该对象逃离方法的作用范围，则要考虑线程安全问题
+        localVariableProblem();
+    }
+
+    private static void synchronizedUse() {
         Thread04ConcurrentProblemDemo thread04ConcurrentProblemDemo = new Thread04ConcurrentProblemDemo(); // 相同的资源
         // 相同资源分4个线程运行
         new Thread(thread04ConcurrentProblemDemo).start();
         new Thread(thread04ConcurrentProblemDemo).start();
         new Thread(thread04ConcurrentProblemDemo).start();
         new Thread(thread04ConcurrentProblemDemo).start();
+    }
+
+    private static void synchronizedOptimize() throws InterruptedException {
+        Room room = new Room();
+
+        Thread t1 = new Thread(() -> {
+            for (int i = 0; i < 5000; i++) {
+                room.increment();
+            }
+        }, "t1");
+
+        Thread t2 = new Thread(() -> {
+            for (int i = 0; i < 5000; i++) {
+                room.decrement();
+            }
+        }, "t2");
+
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+
+        System.out.println(room.getCount()); // 0
+    }
+
+    private static void localVariableProblem() {
+
     }
 }
