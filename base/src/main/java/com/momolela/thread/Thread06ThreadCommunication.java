@@ -6,7 +6,7 @@ package com.momolela.thread;
 class Res {
     String name;
     String sex;
-    boolean flag = false; // 当为false的时候Input执行，当为true的时候Output执行，保证输入和输出均匀
+    boolean flag = false; // 当为 false 的时候 Input 执行，当为 true 的时候 Output 执行，保证输入和输出均匀
 
     synchronized void in(String name, String sex) {
         if (this.flag) {
@@ -119,10 +119,10 @@ class Output implements Runnable {
  * notifyAll()
  * 都使用在同步中，因为要对锁的线程操作，只有同步才有锁
  * <p>
- * 为什么这些操作方法都定义在Object类中呢？
+ * 为什么这些操作方法都定义在 Object 类中呢？
  * 这些方法在操作同步中线程时，都必须要标识他们所操作线程的锁，
- * 只有同一个锁上被等待的线程能被同一个锁上的notify()唤醒，不可以对不同锁中的线程进行唤醒，
- * 等待和唤醒必须是同一个锁，而锁的对象可是任意对象，所以定义在Object类中。
+ * 只有同一个锁上被等待的线程能被同一个锁上的 notify() 唤醒，不可以对不同锁中的线程进行唤醒，
+ * 等待和唤醒必须是同一个锁，而锁的对象可是任意对象，所以定义在 Object 类中。
  */
 public class Thread06ThreadCommunication {
     public static void main(String[] args) {

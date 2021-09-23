@@ -76,6 +76,21 @@ class Consumer implements Runnable {
     }
 }
 
+
+/**
+ * synchronized 做线程通信的最终方案
+ *
+ * synchronized (lock) {
+ *     while (条件不成立) { // 解决虚假唤醒的最终方案
+ *         lock.wait();
+ *     }
+ *     // 干活
+ * }
+ * // 另外一个线程
+ * synchronized (lock) {
+ *     lock.notifyAll(); // 解决虚假唤醒的问题
+ * }
+ */
 public class Thread07ProducerConsumer {
 
     public static void main(String[] args) {
