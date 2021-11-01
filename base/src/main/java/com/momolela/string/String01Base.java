@@ -50,5 +50,8 @@ public class String01Base {
         String h = "eeefff";
         System.out.println(g == h); // true
 
+
+        System.out.println(null + ""); // null
+
     }
 }
