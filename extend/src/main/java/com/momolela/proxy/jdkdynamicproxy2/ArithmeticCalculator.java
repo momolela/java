@@ -1,9 +1,5 @@
 package com.momolela.proxy.jdkdynamicproxy2;
 
-public class ArithmeticCalculator {
-
-    public int add(int a, int b) {
-        return a + b;
-    }
-
+public interface ArithmeticCalculator {
+    int add (int a, int b);
 }
