@@ -2,4 +2,11 @@
 /.idea/
 /base/target/
 /concurrent/target/
+/designPattern/target/
+/extend/target/
+/jar/target/
+/java9NewFeatures/target/
+/juc/target/
+/jvm/target/
+/util/target/
 /target/
