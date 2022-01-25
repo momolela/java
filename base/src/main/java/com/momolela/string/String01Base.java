@@ -51,7 +51,7 @@ public class String01Base {
         System.out.println(g == h); // true
 
 
-        System.out.println(null + ""); // null
+        System.out.println((char)44); // ,
 
     }
 }
