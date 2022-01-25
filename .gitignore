@@ -1,7 +1,5 @@
 # Default ignored files
 /.idea/
-/.idea/workspace.xml
-/.idea/compiler.xml
 /base/target/
 /concurrent/target/
 /target/
