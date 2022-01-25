@@ -10,30 +10,30 @@ public class KeyUtils {
     public static void main(String[] args) {
 
 
-//        Map<String,Object> params = new HashMap<>();
-//        params.put("SOURCEPATIENTID", "2106021002");
-//        params.put("SOURCEPATIENTIDTYPE", "OV");
-//        params.put("AUTHORORGANIZATION", "");
-//        System.out.println(createPatientId1(params));
+       Map<String,Object> params = new HashMap<>();
+       params.put("SOURCEPATIENTID", "410313422");
+       params.put("SOURCEPATIENTIDTYPE", "IV");
+       params.put("AUTHORORGANIZATION", "45075129-0");
+       System.out.println(createPatientId1(params));
 
 
-//        System.out.println(createPrimaryKeyNew1("2106021002OV47045223-9"));
+       // System.out.println(createPrimaryKeyNew1("2106021002OV47045223-9"));
 
 
-//        Map<String,Object> params = new HashMap<>();
-//        params.put("VISITID", "658770");
-//        params.put("PATIENTTYPE", "04");
-//        params.put("SOURCEPATIENTID", "658770");
-//        params.put("SOURCEPATIENTIDTYPE", "IV");
-//        params.put("AUTHORORGANIZATION", "123303004705255657");
-//        System.out.println(createVisitID(params));
+       // Map<String,Object> params = new HashMap<>();
+       // params.put("VISITID", "658770");
+       // params.put("PATIENTTYPE", "04");
+       // params.put("SOURCEPATIENTID", "658770");
+       // params.put("SOURCEPATIENTIDTYPE", "IV");
+       // params.put("AUTHORORGANIZATION", "123303004705255657");
+       // System.out.println(createVisitID(params));
 
 
-        Map<String,Object> params = new HashMap<>();
-        params.put("SourceId", "");
-        params.put("AuthorOrganization", "");
-        params.put("RecordClassifying", "TransfusionRecord");
-        System.out.println(generateDcId(params));
+        // Map<String,Object> params = new HashMap<>();
+        // params.put("SourceId", "");
+        // params.put("AuthorOrganization", "");
+        // params.put("RecordClassifying", "TransfusionRecord");
+        // System.out.println(generateDcId(params));
     }
 
     public static String createPatientId1(Map<String, Object> head) {
