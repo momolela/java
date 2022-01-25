@@ -1,4 +1,4 @@
-package com.momolela.proxy.jdkdynamicproxy;
+package com.momolela.proxy.jdkdynamicproxy1;
 
 /**
  * 定义一个接口

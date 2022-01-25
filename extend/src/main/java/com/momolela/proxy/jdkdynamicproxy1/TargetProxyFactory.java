@@ -1,4 +1,4 @@
-package com.momolela.proxy.jdkdynamicproxy;
+package com.momolela.proxy.jdkdynamicproxy1;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
