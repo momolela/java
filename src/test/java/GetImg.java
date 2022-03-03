@@ -13,7 +13,9 @@ import java.util.regex.Pattern;
 public class GetImg {
 
     // 地址
-    private static List<String> URL = new ArrayList<>(Arrays.asList("https://m.docin.com/renren_379660010"));
+    // private static List<String> URL = new ArrayList<>(Arrays.asList("https://m.docin.com/renren_379660010"));
+
+    public static String baseUrl = "https://asiansister.com/viewImg.php?code=2041&id=";
 
     private static final String prefix = "C:/Users/Administrator/Desktop/me";
 
@@ -26,6 +28,12 @@ public class GetImg {
 
 
     public static void main(String[] args) throws Exception {
+
+        List<String> URL = new ArrayList<>();
+        for (int i = 0; i < 36; i++) {
+            URL.add(baseUrl + i);
+        }
+
         GetImg cm = new GetImg();
         for (String url : URL) {
             //获得html文本内容
@@ -50,6 +58,7 @@ public class GetImg {
     private String getHTML(String url) throws Exception {
         URL uri = new URL(url);
         URLConnection connection = uri.openConnection();
+        connection.setRequestProperty("userAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.62");
         InputStream in = connection.getInputStream();
         byte[] buf = new byte[1024];
         int length = 0;
