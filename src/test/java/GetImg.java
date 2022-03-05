@@ -6,6 +6,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,9 +16,11 @@ public class GetImg {
     // 地址
     // private static List<String> URL = new ArrayList<>(Arrays.asList("https://m.docin.com/renren_379660010"));
 
-    public static String baseUrl = "https://asiansister.com/viewImg.php?code=2041&id=";
+    public static String baseUrl = "https://www.tuao8.xyz/post/338.html?page=";
 
-    private static final String prefix = "C:/Users/Administrator/Desktop/me";
+    public static int num = 23;
+
+    private static final String prefix = "/Users/sunzj/Desktop/me";
 
     // 编码
     private static final String ECODING = "UTF-8";
@@ -30,12 +33,13 @@ public class GetImg {
     public static void main(String[] args) throws Exception {
 
         List<String> URL = new ArrayList<>();
-        for (int i = 0; i < 36; i++) {
+        for (int i = 1; i < num; i++) {
             URL.add(baseUrl + i);
         }
 
         GetImg cm = new GetImg();
         for (String url : URL) {
+            TimeUnit.SECONDS.sleep(6);
             //获得html文本内容
             String HTML = cm.getHTML(url);
             //获取图片标签
@@ -58,9 +62,9 @@ public class GetImg {
     private String getHTML(String url) throws Exception {
         URL uri = new URL(url);
         URLConnection connection = uri.openConnection();
-        connection.setRequestProperty("userAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.62");
+        connection.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.62");
         InputStream in = connection.getInputStream();
-        byte[] buf = new byte[1024];
+        byte[] buf = new byte[1024 * 10];
         int length = 0;
         StringBuffer sb = new StringBuffer();
         while ((length = in.read(buf, 0, buf.length)) > 0) {
@@ -92,8 +96,11 @@ public class GetImg {
      * @return
      */
     private List<String> getImageSrc(List<String> listImageUrl) {
-        List<String> listImgSrc = new ArrayList<String>();
+        List<String> listImgSrc = new ArrayList<>();
         for (String image : listImageUrl) {
+            if (!image.contains("upload")) {
+                continue;
+            }
             Matcher matcher = Pattern.compile(IMGSRC_REG).matcher(image);
             while (matcher.find()) {
                 listImgSrc.add(matcher.group().substring(0, matcher.group().length() - 1));
@@ -111,8 +118,14 @@ public class GetImg {
         for (String url : listImgSrc) {
             String imageName = prefix + "/" + url.substring(url.lastIndexOf("/") + 1, url.contains("?") ? url.indexOf("?") : url.length());
             try {
+                // URL uri = new URL(url);
+                // InputStream in = uri.openStream();
+
                 URL uri = new URL(url);
-                InputStream in = uri.openStream();
+                URLConnection connection = uri.openConnection();
+                connection.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.62");
+                InputStream in = connection.getInputStream();
+
                 FileOutputStream fo = new FileOutputStream(new File(imageName));
                 byte[] buf = new byte[1024];
                 int length = 0;
