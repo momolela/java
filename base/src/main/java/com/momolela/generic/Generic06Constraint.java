@@ -32,6 +32,12 @@ class Student extends Person {
     }
 }
 
+class Baby extends Student {
+    Baby(String name) {
+        super(name);
+    }
+}
+
 class Worker extends Person {
     Worker(String name) {
         super(name);
@@ -45,24 +51,40 @@ public class Generic06Constraint {
         arrayList1.add("abc1");
         arrayList1.add("abc2");
         arrayList1.add("abc3");
-        printList1(arrayList1); // 在方法上定义泛型 T ，能处理一个固定类型
+        // printList1 方法入参定义为 ArrayList<String> arrayList
+        // 在方法上定义泛型 T ，能处理一个固定类型
+        // T 是类型形参
+        printList1(arrayList1);
+        // printList1(arrayList2); // 排除定义先后的错，这里还会报泛型的错，因为他处理不了 Integer 的类型
 
         ArrayList<Integer> arrayList2 = new ArrayList<Integer>();
         arrayList2.add(1);
         arrayList2.add(2);
         arrayList2.add(3);
-        printList2(arrayList2); // 用 ? 通配符接收，能处理任意类型，T 是固定一个类型之后不能变了，但是 ? 可以对应任意类型
+        // printList2 方法入参定义为 ArrayList<?> arrayList
+        // 用 ? 通配符接收，能处理任意类型，T 是固定一个类型之后不能变了，但是 ? 可以对应任意类型。
+        // ? 是类型实参数
+        printList2(arrayList2);
+        printList2(arrayList1); // 这里也可以正常打印
 
-        ArrayList<Student> arrayList3 = new ArrayList<Student>();
-        arrayList3.add(new Student("sabc---1"));
-        arrayList3.add(new Student("sabc---2"));
-        arrayList3.add(new Student("sabc---3"));
+        ArrayList<Person> arrayList3 = new ArrayList<Person>();
+        arrayList3.add(new Person("pabc---1"));
+
+        ArrayList<Student> arrayList4 = new ArrayList<Student>();
+        arrayList4.add(new Student("sabc---1"));
         // ArrayList<Student> al = new ArrayList<Person>(); 是不允许的，左右两边必须一致；
         // ArrayList<Person> al = new ArrayList<Student>(); 是不允许的，左右两边必须一致；
 
-        printList3(arrayList3); // 打印里限定了上限是 Person
+        ArrayList<Baby> arrayList5 = new ArrayList<Baby>();
+        arrayList3.add(new Baby("babc---1"));
 
-        printList4(arrayList3); // 打印里限定了下限是 Student
+        // printList3(arrayList3); // 会报错，因为打印里限定了上限是 Student，只能是 Student 和它的子类类
+        printList3(arrayList4); // 打印里限定了上限是 Student
+        printList3(arrayList5); // 不会报错
+
+        printList4(arrayList3); // 不会报错
+        printList4(arrayList4); // 打印里限定了下限是 Student
+        // printList4(arrayList5); // 会报错，因为打印里限定了下限是 Student，只能是 Student 和它的父类
 
         /**
          * 比较器可以接收父类 Person，然后里面既可以比较 Student ，也可以比较 Worker
@@ -142,10 +164,14 @@ public class Generic06Constraint {
      *
      * @param arrayList
      */
-    private static void printList3(ArrayList<? extends Person> arrayList) {
-        Iterator<? extends Person> it = arrayList.iterator();
+    private static void printList3(ArrayList<? extends Student> arrayList) {
+        // 这里不能添加，下面的会报错，因为 ? 可以是 Student 或者 Baby，没有共同父类，所以不能添加具体的类型
+        // arrayList.add(new Person("a"));
+        // arrayList.add(new Student("a"));
+        // arrayList.add(new Baby("a"));
+        Iterator<? extends Student> it = arrayList.iterator();
         while (it.hasNext()) {
-            Person next = it.next();
+            Student next = it.next();
             System.out.println(next.getName());
         }
     }
@@ -158,6 +184,10 @@ public class Generic06Constraint {
      * @param arrayList
      */
     private static void printList4(ArrayList<? super Student> arrayList) {
+        // 如下面，可以添加 Student 和 Baby 类型，因为 ? 可以是 Student 或者 Person，一定有个共同父类 Student，所以可以添加 Student 或者 Student 的子类
+        // arrayList.add(new Person("a")); // 会报错
+        // arrayList.add(new Student("a")); // 不会报错
+        // arrayList.add(new Baby("a")); // 不会报错
         Iterator<? super Student> it = arrayList.iterator();
         while (it.hasNext()) {
             System.out.println(it.next().toString());
