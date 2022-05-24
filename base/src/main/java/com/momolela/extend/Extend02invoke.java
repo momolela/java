@@ -13,7 +13,7 @@ class Father {
 }
 
 class Son1 extends Father {
-    public String name = "sunzjs1";
+    public String name = "sunzj s1";
 
     @Override
     public String print() {
@@ -27,7 +27,7 @@ class Son1 extends Father {
 }
 
 class Son2 extends Father {
-    public String name = "sunzjs2";
+    public String name = "sunzj s2";
 
     @Override
     public String print() {
@@ -67,14 +67,15 @@ public class Extend02invoke {
         Son2 s2 = new Son2();
 
         Visitor visitor = new Visitor();
-        visitor.method(father); // This is Father's method，只会走工具类中 method(Father father) 方法
-        visitor.method(fs1); // This is Father's method，只会走工具类中 method(Father father) 方法
-        visitor.method(fs2); // This is Father's method，只会走工具类中 method(Father father) 方法
+        visitor.method(father); // This is Father's method，sunzj，sunzj，只会走工具类中 method(Father father) 方法
+        visitor.method(fs1); // This is Father's method，sunzj，sunzj s1，只会走工具类中 method(Father father) 方法
+        visitor.method(fs2); // This is Father's method，sunzj，sunzj s2，只会走工具类中 method(Father father) 方法
 
         visitor.method(s1); // This is Son1's method，只会走工具类中 method(Son1 son) 方法
         visitor.method(s2); // This is Son2's method，只会走工具类中 method(Son2 son) 方法
 
-        father.accept(visitor); // This is Father's method，体现了多态
+        father.accept(visitor); // This is Father's method，sunzj，sunzj，体现了多态
+
         fs1.accept(visitor); // This is Son1's method，体现了多态
         fs2.accept(visitor); // This is Son2's method，体现了多态
     }
