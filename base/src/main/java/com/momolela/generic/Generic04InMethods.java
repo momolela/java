@@ -19,8 +19,30 @@ class GenericMethods<T> {
      * @param e
      * @param <E>
      */
-    public <E> void print(E e) {
+    public <E> void print1(E e) {
         System.out.println("print:" + e);
+    }
+
+    /**
+     * 方法上定义的泛型 T，和类上定义的泛型 T 是完全独立的
+     *
+     * @param e
+     * @param <T>
+     */
+    public <T> void print2(T e) {
+        System.out.println("print:" + e);
+    }
+
+    /**
+     * 泛型方法支持定义可变参数
+     *
+     * @param e
+     * @param <E>
+     */
+    public <E> void print3(E... e) {
+        for (int i = 0; i < e.length; i++) {
+            System.out.println(e);
+        }
     }
 
 
@@ -45,7 +67,7 @@ public class Generic04InMethods {
     public static void main(String[] args) {
         GenericMethods<String> gms = new GenericMethods<String>();
         gms.show("haha"); // 创建对象的时候，指定了泛型为 String ，如果这里传递了其他类型的参数会报错
-        gms.print(new Integer(123));
+        gms.print1(new Integer(123));
         GenericMethods.staticMethod(new Integer(456));
     }
 }
