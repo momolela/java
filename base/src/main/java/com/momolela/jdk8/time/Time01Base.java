@@ -12,43 +12,43 @@ public class Time01Base {
         // 这个类与 java.util.Date 略有不同，因为它只包含日期，没有时间。
         // 并且格式化了日期
         LocalDate today = LocalDate.now();
-        System.out.println(today);
+        System.out.println(today); // 2022-05-25
 
         // localDate 获取年月日，月从 1 开始
         int year = today.getYear();
         int month = today.getMonthValue();
         int day = today.getDayOfMonth();
-        System.out.println("今天是：" + year + "-" + month + "-" + day);
+        System.out.println("今天是：" + year + "-" + month + "-" + day); // 今天是：2022-5-25
 
         // localDate 获取某个特定的日期
         LocalDate birth = LocalDate.of(1995, 11, 1);
-        System.out.println("我的生日是：" + birth);
+        System.out.println("我的生日是：" + birth); // 我的生日是：1995-11-01
 
         // localDate 的日期比较
-        System.out.println(today.isAfter(birth));
-        System.out.println(today.isBefore(birth));
-        System.out.println(today.isEqual(LocalDate.now()));
-        System.out.println(today.equals(birth));
+        System.out.println(today.isAfter(birth)); // true
+        System.out.println(today.isBefore(birth)); // false
+        System.out.println(today.isEqual(LocalDate.now())); // true
+        System.out.println(today.equals(birth)); // false
 
         // localDate 获取一周后的日期
         // ChronoUnit 是时间单位
-        // LocalDate也是不可变的，因此任何修改操作都会返回一个新的实例
+        // LocalDate 也是不可变的，因此任何修改操作都会返回一个新的实例
         LocalDate oneWeekAfterDay = today.plus(1, ChronoUnit.WEEKS);
-        System.out.println("一周后的日期是：" + oneWeekAfterDay);
+        System.out.println("一周后的日期是：" + oneWeekAfterDay); // 一周后的日期是：2022-06-01
 
         // localDate 获取一年前后的日期
         // ChronoUnit 是时间单位
         LocalDate oneYearBeforeDay = today.minus(1, ChronoUnit.YEARS);
-        System.out.println("一年前的日期是：" + oneYearBeforeDay);
+        System.out.println("一年前的日期是：" + oneYearBeforeDay); // 一年前的日期是：2021-05-25
         LocalDate oneYearAfterDay = today.plus(1, ChronoUnit.YEARS);
-        System.out.println("一年后的日期是：" + oneYearAfterDay);
+        System.out.println("一年后的日期是：" + oneYearAfterDay); // 一年后的日期是：2023-05-25
 
         // localDate 判断是否为闰年
         boolean leapYear = today.isLeapYear();
         if (leapYear) {
             System.out.println("今年是闰年");
         } else {
-            System.out.println("今年不是闰年");
+            System.out.println("今年不是闰年"); // 今年不是闰年
         }
 
         // localDate 格式化成日期
@@ -64,10 +64,10 @@ public class Time01Base {
 
         // localDateTime 日期时间转成字符串
         DateTimeFormatter dateTimeFormatter1 = DateTimeFormatter.ofPattern("MM dd yyyy HH:mm a");
-        System.out.println(dateTimeFormatter1.format(LocalDateTime.now())); // 08 24 2021 23:03 下午
+        System.out.println(dateTimeFormatter1.format(LocalDateTime.now())); // 05 25 2022 08:57 上午
 
         // ChronoUnit 算日期的间隔
-        System.out.printf("日期：%s，和日期：%s 之间相隔 %s 天 %n", birth, today, ChronoUnit.DAYS.between(birth, today));
+        System.out.printf("日期：%s，和日期：%s 之间相隔 %s 天 %n", birth, today, ChronoUnit.DAYS.between(birth, today)); // 日期：1995-11-01，和日期：2022-05-25 之间相隔 9702 天
 
 
         // ---------- MonthDay
@@ -80,7 +80,7 @@ public class Time01Base {
         if (monthDay.equals(monthDayFrom)) {
             System.out.println("今天是我的生日");
         } else {
-            System.out.println("今天不是我的生日");
+            System.out.println("今天不是我的生日"); // 今天不是我的生日
         }
 
 
@@ -142,9 +142,14 @@ public class Time01Base {
         // 可以看到，当前时间戳是包含日期和时间的，与 java.util.Date 很类似，事实上 Instant 就是 java8 以前的 Date
         // 可以使用这个两个类中的方法在这两个类型之间进行转换，比如 Date.from(Instant) 就是用来把 Instant 转换成 java.util.date 的
         // 而 Date.toInstant() 就是将 Date 转换成 Instant 的
-        Instant nowTimeStamp = Instant.now();
-        Date instantToDate = Date.from(nowTimeStamp);
+        LocalDateTime dateTime1 = LocalDateTime.now();
+        ZoneId zoneId = ZoneId.systemDefault();
+        ZonedDateTime zonedDateTime1 = dateTime1.atZone(zoneId);
+        Instant instant1 = zonedDateTime1.toInstant();
+        Date date1 = Date.from(instant1);
+        System.out.println("LocalDateTime 转换为 new Date() 的结果是：" + date1);
         Instant dateToInstant = new Date().toInstant();
-        System.out.println("当前时间戳是：" + nowTimeStamp);
+        LocalDateTime dateTime2 = LocalDateTime.ofInstant(dateToInstant, ZoneId.systemDefault());
+        System.out.println("new Date() 转换为 LocalDateTime 的结果是：" + dateTime2);
     }
 }
