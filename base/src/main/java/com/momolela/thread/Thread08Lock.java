@@ -25,9 +25,12 @@ class ResourceLock {
                     e.printStackTrace();
                 }
             }
+
+            // 资源的修改
             this.name = name + "-" + this.count++;
             System.out.println(Thread.currentThread().getName() + " ==生产者== " + this.name);
             this.flag = true;
+
             condition_consumer.signal(); // 为了避免死锁，要唤醒所有的消费者线程，指定某类线程唤醒
         } finally {
             lock.unlock(); // 一定要释放锁
@@ -44,8 +47,11 @@ class ResourceLock {
                     e.printStackTrace();
                 }
             }
+
+            // 资源的修改读取
             System.out.println(Thread.currentThread().getName() + " ==消费者== " + this.name);
             this.flag = false;
+
             condition_producer.signal(); // 为了避免死锁，要唤醒所有的生产者线程，指定某类线程唤醒
         } finally {
             lock.unlock(); // 释放锁
