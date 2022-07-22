@@ -14,11 +14,7 @@ import java.util.regex.Pattern;
 public class GetImg {
 
     // 地址
-    // private static List<String> URL = new ArrayList<>(Arrays.asList("https://m.docin.com/renren_379660010"));
-
-    public static String baseUrl = "https://www.tuao8.xyz/post/338.html?page=";
-
-    public static int num = 23;
+    private static List<String> URL = new ArrayList<>(Arrays.asList("https://m.docin.com/renren_379660010"));
 
     private static final String prefix = "/Users/sunzj/Desktop/me";
 
@@ -31,11 +27,6 @@ public class GetImg {
 
 
     public static void main(String[] args) throws Exception {
-
-        List<String> URL = new ArrayList<>();
-        for (int i = 1; i < num; i++) {
-            URL.add(baseUrl + i);
-        }
 
         GetImg cm = new GetImg();
         for (String url : URL) {
@@ -65,9 +56,8 @@ public class GetImg {
         connection.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.62");
         InputStream in = connection.getInputStream();
         byte[] buf = new byte[1024 * 10];
-        int length = 0;
         StringBuffer sb = new StringBuffer();
-        while ((length = in.read(buf, 0, buf.length)) > 0) {
+        while ((in.read(buf, 0, buf.length)) > 0) {
             sb.append(new String(buf, ECODING));
         }
         in.close();
@@ -82,7 +72,7 @@ public class GetImg {
      */
     private List<String> getImageUrl(String HTML) {
         Matcher matcher = Pattern.compile(IMGURL_REG).matcher(HTML);
-        List<String> listImgUrl = new ArrayList<String>();
+        List<String> listImgUrl = new ArrayList<>();
         while (matcher.find()) {
             listImgUrl.add(matcher.group());
         }
@@ -98,9 +88,6 @@ public class GetImg {
     private List<String> getImageSrc(List<String> listImageUrl) {
         List<String> listImgSrc = new ArrayList<>();
         for (String image : listImageUrl) {
-            if (!image.contains("upload")) {
-                continue;
-            }
             Matcher matcher = Pattern.compile(IMGSRC_REG).matcher(image);
             while (matcher.find()) {
                 listImgSrc.add(matcher.group().substring(0, matcher.group().length() - 1));
