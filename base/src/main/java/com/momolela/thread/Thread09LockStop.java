@@ -4,6 +4,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
 /**
+ * interrupt
+ * 可以打断 wait、sleep、join 和 LockSupport.park()
+ *
  * 线程里面是个循环，通过控制 flag 来控制停止线程
  */
 class Thread09LockStopDemo implements Runnable {
@@ -39,7 +42,7 @@ class Thread09LockStopDemo implements Runnable {
 
 public class Thread09LockStop {
     public static void main(String[] args) {
-        // interrupt() 可以打断 wait、sleep
+        // interrupt() 可以打断 wait、sleep、join
         // interruptThread();
 
         // interrupt() 还可以打断 LockSupport.park();
@@ -69,8 +72,8 @@ public class Thread09LockStop {
             System.out.println("park...");
             LockSupport.park(); // 这里执行后会阻塞
             System.out.println("unPark");
-            System.out.println("打断状态为：" + Thread.currentThread().isInterrupted());
-            // 这里再调用 park() 是不起作用的，因为上面已经执行过了 LockSupport.park();
+            System.out.println("打断状态为：" + Thread.currentThread().isInterrupted()); // true
+            // 这里再调用 park() 是不起作用的，因为上面已经执行过了 LockSupport.park()，只有线程状态为 false 的时候 LockSupport.park() 执行才会阻塞
             LockSupport.park();
             System.out.println("unPark");
         }, "myThread");
