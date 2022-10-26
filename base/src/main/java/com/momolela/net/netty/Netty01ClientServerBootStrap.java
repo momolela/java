@@ -37,6 +37,13 @@ class HelloServer {
         });
         // 绑定端口
         serverBootstrap.bind(new InetSocketAddress(9000));
+
+        // byte[] bytes1 = new byte[]{0x0B};
+        // byte[] bytes2 = new byte[]{0x1C};
+        // byte[] bytes3 = new byte[]{0x0D};
+        // System.out.println(new String(bytes1)); // 
+        // System.out.println(new String(bytes2)); // 
+        // System.out.println(new String(bytes3)); //
     }
 }
 
