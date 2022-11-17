@@ -3,6 +3,7 @@ package com.momolela.net.webservice;
 import org.apache.axis.Constants;
 import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
+import org.apache.axis.soap.SOAPConstants;
 
 import javax.xml.namespace.QName;
 import javax.xml.rpc.ParameterMode;
@@ -53,6 +54,9 @@ public class WS01AxisInvoke {
                 // 你需要远程调用的方法
                 call.setOperationName(new QName(soapAction, "invoke"));
 
+                // 针对 soap1.2 的调用，http 的头部信息：content-type 的值是：application/soap+xml；不同于 soap1.1 的 text/xml
+                call.setSOAPVersion(SOAPConstants.SOAP12_CONSTANTS);
+
                 // 方法参数，如果没有参数请无视
                 // call.addParameter(new QName(soapaction,"ODS_updatePrescriptionState"), XMLType.XSD_STRING, ParameterMode.IN);
                 // call.addParameter(new QName(soapaction,""), XMLType.XSD_STRING, ParameterMode.IN);
@@ -62,7 +66,7 @@ public class WS01AxisInvoke {
                 // 设置返回类型，对方接口返回的json，我就用string接收了,自定义类型另贴一个代码
                 // call.setReturnType(XMLType.XSD_STRING);
 
-                // 调用方法并传递参数，没有参数的话： call.invoke(new Object[] { null});
+                // 调用方法并传递参数，没有参数的话： call.invoke(new Object[] {null});
                 call.setEncodingStyle("UTF-8");
                 call.addParameter("service", Constants.XSD_STRING, String.class, ParameterMode.IN);
                 call.addParameter("urid", Constants.XSD_STRING, String.class, ParameterMode.IN);
