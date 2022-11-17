@@ -25,6 +25,10 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
+/**
+ * kryo 的工厂类
+ * 提供池化对象 kryoPool，因为 kryo 的创建很消耗资源
+ */
 public class KryoFactory {
     public static final KryoFactory instance = new KryoFactory();
     private static final Set<KryoClassRegistration> kryoClassRegistrations = Sets.newConcurrentHashSet();
@@ -71,6 +75,7 @@ public class KryoFactory {
         kryoClassRegistrations.add(new KryoClassRegistration(17, Object[].class));
         kryoClassRegistrations.add(new KryoClassRegistration(18, Class.class));
         kryoClassRegistrations.add(new KryoClassRegistration(19, Object.class));
+        // 序列化 xml 文件的 Registration
         kryoClassRegistrations.add(new KryoClassRegistration(20, DefaultDocument.class, new DefaultDocumentKryoSerializer()));
     }
 
@@ -86,6 +91,7 @@ public class KryoFactory {
 
             kryo.setRegistrationRequired(false);
             kryo.setInstantiatorStrategy(new DefaultInstantiatorStrategy(new StdInstantiatorStrategy()));
+            // 当有修饰符 transient 修饰的变量不能被序列化
             kryo.getFieldSerializerConfig().setCopyTransient(false);
 
             for (KryoClassRegistration r : KryoFactory.kryoClassRegistrations) {
@@ -106,16 +112,20 @@ public class KryoFactory {
             kryo.register(Collections.singletonMap("", "").getClass(), new CollectionsSingletonMapSerializer());
             kryo.register(URI.class, new URISerializer());
             kryo.register(Pattern.class, new RegexSerializer());
+
             UnmodifiableCollectionsSerializer.registerSerializers(kryo);
             SynchronizedCollectionsSerializer.registerSerializers(kryo);
             ImmutableListSerializer.registerSerializers(kryo);
             ImmutableMapSerializer.registerSerializers(kryo);
+
             SubListSerializers.addDefaultSerializers(kryo);
+
             return kryo;
         }
 
         @Override
         public PooledObject<Kryo> wrap(Kryo kryo) {
+            // 包装为可维护的对象
             return new DefaultPooledObject(kryo);
         }
     }
