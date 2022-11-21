@@ -1,47 +1,70 @@
 package com.momolela.util;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
+import org.dom4j.*;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.HashMap;
 
 public class XMLUtil {
     public static void main(String[] args) throws DocumentException, IOException {
-        testEscapeXml1();
-        testEscapeXml("<div><'\"&</div>");
+        // // 创建 xml
+        // Document document = DocumentHelper.createDocument();
+        // Element school = document.addElement("school");
+        // Element student = school.addElement("student");
+        // student.addAttribute("id", "1");
+        // Element name = student.addElement("name");
+        // // 特殊字符 <
+        // name.setText("张三<");
+        // System.out.println(documentToString(document, true));
+
+        // String xmlNew = StringEscapeUtils.escapeXml("<div><'\"&</div>");
+        // System.out.println(xmlNew);
+        // String unescapeXml = StringEscapeUtils.unescapeXml(xmlNew);
+        // System.out.println(unescapeXml);
+        // // <div><'"&</div> 进行 parseText 会报错
+        // DocumentHelper.parseText(unescapeXml);
+
+        // String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+        //         "<ClinicalDocument xmlns=\"urn:hl7-org:v3\"\n" +
+        //         "          xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:hl7-org:v3 ../sdschemas/SDA.xsd\">\n" +
+        //         "  <!--地域代码-->\n" +
+        //         "  <realmCode code=\"CN\"/>\n" +
+        //         "</ClinicalDocument>";
+        // Document document = DocumentHelper.parseText(xml);
+        // // 定义命名空间
+        // HashMap<String, Object> nsMap = new HashMap<>();
+        // nsMap.put("urn", "urn:hl7-org:v3");
+        // XPath xPath = document.createXPath("//urn:ClinicalDocument//urn:realmCode");
+        // xPath.setNamespaceURIs(nsMap);
+        // Element element = (Element) xPath.selectSingleNode(document);
+        // System.out.println(element.attributeValue("code"));
     }
 
-    public static void testEscapeXml(String xml) throws DocumentException {
-        String xmlNew = StringEscapeUtils.escapeXml(xml);
-        System.out.println(xmlNew);
 
-        String unescapeXml = StringEscapeUtils.unescapeXml(xmlNew);
-        System.out.println(unescapeXml);
-
-        DocumentHelper.parseText(unescapeXml);
-    }
-
-    public static void testEscapeXml1() throws IOException, DocumentException {
-        String haha = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><soapenv:Body><validateInvoiceResponse soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><validateInvoiceReturn xsi:type=\"soapenc:string\" xmlns:soapenc=\"http://schemas.xmlsoap.org/soap/encoding/\">{&quot;returncode&quot;:&quot;10006&quot;,&quot;returnmsg&quot;:&quot;&#x672A;&#x83B7;&#x53D6;&#x5230;&#x4EA4;&#x6613;&#x673A;&#x6784;&#x4FE1;&#x606F;&quot;,&quot;fpdm&quot;:&quot;null&quot;,&quot;fphm&quot;:&quot;null&quot;,&quot;kprq&quot;:&quot;null&quot;}\n" +
-                "</validateInvoiceReturn></validateInvoiceResponse></soapenv:Body></soapenv:Envelope>";
-
-        System.out.println(haha);
-
-        Document document = DocumentHelper.parseText(haha);
-
-        OutputFormat format = OutputFormat.createPrettyPrint();
-        StringWriter sw = new StringWriter();
-        XMLWriter xw = new XMLWriter(sw, format);
-        xw.setEscapeText(false);
-        xw.write(document);
-        xw.flush();
-
-        String finalRetXml = sw.toString();
-        System.out.println("最终返回报文:\n" + finalRetXml);
+    /**
+     * document 通过格式化器转字符串
+     *
+     * @param document document
+     * @param escape   escape
+     * @return string
+     */
+    public static String documentToString(Document document, boolean escape) {
+        try {
+            // xml 格式化器
+            OutputFormat format = OutputFormat.createPrettyPrint();
+            StringWriter sw = new StringWriter();
+            XMLWriter xw = new XMLWriter(sw, format);
+            // 配置是否转义
+            xw.setEscapeText(escape);
+            xw.write(document);
+            xw.flush();
+            return sw.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
