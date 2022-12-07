@@ -7,6 +7,9 @@ public class Test implements Serializable {
     private String name;
     private int age;
 
+    public Test() {
+    }
+
     public Test(String name, int age) {
         this.name = name;
         this.age = age;

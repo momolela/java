@@ -12,30 +12,37 @@ public class ThreadPoolExecutor05ScheduledThreadPool {
         // scheduleWithFixedDelay
         // 是以上一个任务结束时开始计时，5秒过去后，立即执行
         // 这里会间隔 10 + 5 秒 打印
-        services.scheduleWithFixedDelay(() -> {
-            System.out.println(Thread.currentThread().getName());
-            try {
-                TimeUnit.SECONDS.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }, 10, 5, TimeUnit.SECONDS);
+        // services.scheduleWithFixedDelay(() -> {
+        //     System.out.println(Thread.currentThread().getName() + System.currentTimeMillis());
+        //     try {
+        //         TimeUnit.SECONDS.sleep(10); // 10s
+        //     } catch (InterruptedException e) {
+        //         e.printStackTrace();
+        //     }
+        // }, 0, 5, TimeUnit.SECONDS); // 5s
 
         // scheduleAtFixedRate
         // 是以上一个任务开始的时间计时，5秒过去后，检测上一个任务是否执行完毕，如果上一个任务执行完毕，则当前任务立即执行，如果上一个任务没有执行完毕，则需要等上一个任务执行完毕后立即执行
         // 这里会间隔 10 秒
-        // services.scheduleAtFixedRate(() -> {
-        //     System.out.println(Thread.currentThread().getName());
-        //     try {
-        //         TimeUnit.SECONDS.sleep(10);
-        //     } catch (InterruptedException e) {
-        //         e.printStackTrace();
-        //     }
-        // }, 10, 5, TimeUnit.SECONDS);
+        services.scheduleAtFixedRate(() -> {
+            System.out.println(Thread.currentThread().getName() + System.currentTimeMillis());
+            try {
+                TimeUnit.SECONDS.sleep(10); // 10s
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }, 0, 5, TimeUnit.SECONDS);
 
         // schedule
         // 特定时间延时后执行一次 Runnable ｜ Callable
-        // services.schedule(() -> {}, 5, TimeUnit.SECONDS);
+        // services.schedule(() -> {
+        //     System.out.println(Thread.currentThread().getName() + System.currentTimeMillis());
+        //     try {
+        //         TimeUnit.SECONDS.sleep(10); // 10s
+        //     } catch (InterruptedException e) {
+        //         e.printStackTrace();
+        //     }
+        // }, 5, TimeUnit.SECONDS);
     }
 
 }

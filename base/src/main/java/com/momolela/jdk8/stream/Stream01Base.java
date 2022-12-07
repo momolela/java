@@ -70,7 +70,7 @@ public class Stream01Base {
 
 
         // peek
-        // 一般用于不想改变流中元素本身的类型或者只想元素的内部状态时,一般用于 debugger 的时候，如下 peek 用于打印过滤后的结果
+        // 一般用于不想改变流中元素本身的类型或者只想元素的内部状态时，一般用于 debugger 的时候，如下 peek 用于打印过滤后的结果
         // peek，接收的是 Consumer，没有返回值，不会重新写入到 stream 中
         // map，接收的是 Function，有返回值，会生成新的值重新写入到 stream 中
         // 如下 .peek(s -> s.toUpperCase()) 不会起作用，因为不会返回新的值，所以不会改变 Stream

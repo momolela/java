@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class Regex01Base {
     public static void main(String[] args) {
         replace();
+        System.out.println(xX2x_x("wechatApplet"));
     }
 
     public static void demo1() {
@@ -65,5 +66,34 @@ public class Regex01Base {
         // replaceAll()
         // replaceFirst()
         // quoteReplacement()
+    }
+
+    /**
+     * 将驼峰转为下划线
+     */
+    public static String xX2x_x(String str) {
+        Pattern compile = Pattern.compile("[A-Z]");
+        Matcher matcher = compile.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, "_" + matcher.group(0).toLowerCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
+    }
+
+    /**
+     * 将下划线转为驼峰
+     */
+    public static String x_x2xX(String str) {
+        str = str.toLowerCase();
+        Pattern compile = Pattern.compile("_[a-z]");
+        Matcher matcher = compile.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, matcher.group(0).toUpperCase().replace("_", ""));
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
     }
 }
