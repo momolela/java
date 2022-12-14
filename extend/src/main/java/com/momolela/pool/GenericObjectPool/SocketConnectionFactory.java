@@ -88,7 +88,7 @@ public class SocketConnectionFactory extends BasePooledObjectFactory<Socket> {
 
     /**
      * 钝化归还对象，说白了就是对归还的对象清理
-     * 清空输入流，避免因为上一个请求字节未读取完导致inputStream非空，对下一个产生影响
+     * 清空输入流，避免因为上一个请求字节未读取完导致 inputStream 非空，对下一个产生影响
      */
     @Override
     public void passivateObject(PooledObject<Socket> p) throws Exception {
