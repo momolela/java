@@ -151,5 +151,14 @@ public class Time01Base {
         Instant dateToInstant = new Date().toInstant();
         LocalDateTime dateTime2 = LocalDateTime.ofInstant(dateToInstant, ZoneId.systemDefault());
         System.out.println("new Date() 转换为 LocalDateTime 的结果是：" + dateTime2);
+
+
+        int tableCount = Integer.parseInt("10");
+        DateTimeFormatter patten = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate now = LocalDate.now();
+        // 最早的日期
+        LocalDate lastDate = now.minusDays(tableCount);
+        String lastDateStr = patten.format(lastDate);
+        System.out.println(lastDateStr);
     }
 }
