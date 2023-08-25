@@ -160,5 +160,11 @@ public class Time01Base {
         LocalDate lastDate = now.minusDays(tableCount);
         String lastDateStr = patten.format(lastDate);
         System.out.println(lastDateStr);
+
+
+        String str = "2023-03-21 16:00:47 +0800";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss Z");
+        LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
+        System.out.println(dateTime); // output: 2023-03-21T16:00:47
     }
 }

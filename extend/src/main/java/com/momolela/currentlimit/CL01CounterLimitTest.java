@@ -115,65 +115,72 @@ class FixedCounterLimit {
  */
 class SlideCounterLimit {
 
-    // 结束时间
+    // 结束时间，上次统计时间
     private long lastDateMilliTime = 0L;
-    // 每个窗口的时长
+    // 每个窗口的时长，6s
     private final long milliTimeOffset;
-    // 阈值
+    // 阈值，100 个
     private final Integer countLine;
     // 动态计数器
     private final AtomicInteger count;
     // 当前的窗口索引
-    private int currentIndex;
-    // 窗口个数
+    private int currentWindowIndex;
+    // 窗口个数，10 个
     private final int windowSize;
     // 每个窗口分开统计个数
-    private final int[] windowCount;
+    private final int[] windowReqCountArr;
 
     public SlideCounterLimit(Long time, TemporalUnit unit, Integer countLine, Integer windowSize) {
 
+        // 100 个
         this.countLine = countLine;
+        // 整体计数器最终达到 100
         this.count = new AtomicInteger(0);
+        // 10 个窗口
         this.windowSize = windowSize;
 
         LocalDateTime now = LocalDateTime.now();
+        // 计算 1 分钟的毫秒值，即限量时间范围
         long milliTime = now.plus(time, unit).toInstant(ZoneOffset.ofHours(8)).toEpochMilli() - now.toInstant(ZoneOffset.ofHours(8)).toEpochMilli();
         if (milliTime % this.windowSize != 0) {
             // 窗口个数必须能被限流时间整除，否则抛出异常
             throw new RuntimeException("windowSize " + windowSize + " is not valid");
         }
 
-        // 窗口计数
-        this.windowCount = new int[this.windowSize];
-        Arrays.fill(this.windowCount, 0);
+        // 窗口计数，[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        this.windowReqCountArr = new int[this.windowSize];
+        Arrays.fill(this.windowReqCountArr, 0);
 
-        // 每个窗口的总共时间
+        // 每个窗口的时间，6s
         this.milliTimeOffset = milliTime / windowSize;
     }
 
     public boolean tryLimit() {
         LocalDateTime now = LocalDateTime.now();
         if (this.lastDateMilliTime == 0L) {
-            // 初始化开始时间
+            // 初始化时间，即上次统计时间
             this.lastDateMilliTime = now.toInstant(ZoneOffset.ofHours(8)).toEpochMilli();
         }
         // 经过了多长时间
         long nowMilliTimeOffset = now.toInstant(ZoneOffset.ofHours(8)).toEpochMilli() - this.lastDateMilliTime;
         if (nowMilliTimeOffset >= this.milliTimeOffset) {
-            // 如果大于一个窗口时间，到第二个窗口
-            this.currentIndex++;
-            this.currentIndex = this.currentIndex % this.windowSize;
-            if (this.currentIndex == 0) {
+            // 如果经过的时间大于一个窗口时间，到第二个窗口
+            this.currentWindowIndex++;
+            // 如果加一个窗口后，已经超出了最后一个窗口则回到第一个窗口，10 % 10 得到 0
+            this.currentWindowIndex = this.currentWindowIndex % this.windowSize;
+            if (this.currentWindowIndex == 0) {
+                // 回到第一个窗口，重置
                 this.count.set(0);
-                Arrays.fill(this.windowCount, 0);
+                Arrays.fill(this.windowReqCountArr, 0);
                 this.lastDateMilliTime = 0L;
             } else {
-                this.windowCount[this.currentIndex] = 1;
+                // 顺位到下一个窗口
+                this.windowReqCountArr[this.currentWindowIndex] = 1;
                 this.lastDateMilliTime = now.toInstant(ZoneOffset.ofHours(8)).toEpochMilli();
             }
         } else {
-            // 仍然在当前窗口
-            this.windowCount[this.currentIndex]++;
+            // 仍然在当前窗口，窗口数加 1
+            this.windowReqCountArr[this.currentWindowIndex]++;
         }
         this.count.addAndGet(1);
         return this.count.get() > this.countLine;

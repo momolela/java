@@ -12,6 +12,7 @@ public class HC01Semaphore {
         BlockQueueObj<String> blockQueueObj = new BlockQueueObj<>(1);
         blockQueueObj.add("sunzj");
         System.out.println("first add" + blockQueueObj);
+        // blockQueueObj.remove("sunzj"); // 将这一行去掉注释，下面就不会阻塞了
         blockQueueObj.add("hufy"); // 第二次 add 会阻塞
         System.out.println("second add" + blockQueueObj);
     }
