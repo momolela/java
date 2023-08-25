@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class Integer01 {
+public class Integer01Base {
     public static Integer d;
 
     private Integer b;
@@ -18,7 +18,7 @@ public class Integer01 {
     }
 
     public static void main(String[] args) {
-        System.out.println(Integer01.d); // null，Integer 的默认值是 null，int 的默认值是0
+        System.out.println(Integer01Base.d); // null，Integer 的默认值是 null，int 的默认值是0
 
 
         // Integer a;
@@ -60,7 +60,7 @@ public class Integer01 {
         System.out.println(i1 == i2); // true
 
 
-        Integer01 h = new Integer01();
+        Integer01Base h = new Integer01Base();
         System.out.println(h.getB()); // null，Integer 的默认值是 null，int 的默认值是0
 
 
