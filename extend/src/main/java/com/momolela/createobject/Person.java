@@ -2,6 +2,9 @@ package com.momolela.createobject;
 
 import java.io.Serializable;
 
+/**
+ * @author sunzj
+ */
 public class Person implements Cloneable, Serializable {
     String name;
     int age;

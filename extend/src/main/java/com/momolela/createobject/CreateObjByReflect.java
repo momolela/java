@@ -3,6 +3,9 @@ package com.momolela.createobject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * @author sunzj
+ */
 public class CreateObjByReflect {
     public static void main(String[] args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Class<Person> personClass = Person.class;

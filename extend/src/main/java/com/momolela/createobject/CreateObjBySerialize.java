@@ -2,6 +2,9 @@ package com.momolela.createobject;
 
 import java.io.*;
 
+/**
+ * @author sunzj
+ */
 public class CreateObjBySerialize {
     public static void main(String[] args) {
         Person person = new Person("sunzj", 26);

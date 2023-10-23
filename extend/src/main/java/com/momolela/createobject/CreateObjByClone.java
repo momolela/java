@@ -1,5 +1,8 @@
 package com.momolela.createobject;
 
+/**
+ * @author sunzj
+ */
 public class CreateObjByClone {
 
     public static void main(String[] args) throws CloneNotSupportedException {

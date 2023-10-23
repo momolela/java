@@ -62,7 +62,7 @@ public class NetUtil {
      *
      * @return MACAddressList
      */
-    private static List<String> getMACAddressList() throws IOException {
+    public static List<String> getMACAddressList() throws IOException {
         ArrayList<String> macAddressList = new ArrayList<>();
         String os = System.getProperty("os.name");
         String[] command;
