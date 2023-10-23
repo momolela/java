@@ -4,12 +4,16 @@ public class MediaAdapter implements MediaPlayer {
 
     private AdvancedMediaPlayer advancedMediaPlayer;
 
-    public MediaAdapter(AdvancedMediaPlayer advancedMediaPlayer) {
-        this.advancedMediaPlayer = advancedMediaPlayer;
+    public MediaAdapter(String mediaType) {
+        if ("mp4".equals(mediaType)) {
+            this.advancedMediaPlayer = new Mp4Player();
+        } else if ("vlc".equals(mediaType)) {
+            this.advancedMediaPlayer = new VlcPlayer();
+        }
     }
 
     @Override
-    public void newPlay(String mediaType) {
+    public void play(String mediaType) {
         this.advancedMediaPlayer.AdvancedPlay();
     }
 }

@@ -11,8 +11,8 @@ public class RedShapeDecorator extends ShapeDecorator {
 
     @Override
     public void draw() {
-        decoratedShape.draw();
-        setRedBorder(decoratedShape);
+        shape.draw();
+        setRedBorder(shape);
     }
 
     private void setRedBorder(Shape decoratedShape) {

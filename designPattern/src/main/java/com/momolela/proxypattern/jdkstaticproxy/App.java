@@ -1,5 +1,8 @@
 package com.momolela.proxypattern.jdkstaticproxy;
 
+/**
+ * @author sunzj
+ */
 public class App {
     public static void main(String[] args) {
         // 创建一个普通接口实现类对象，里面有自己实现的方法
