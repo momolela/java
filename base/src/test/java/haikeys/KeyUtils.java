@@ -10,11 +10,11 @@ public class KeyUtils {
     public static void main(String[] args) {
 
 
-       Map<String,Object> params = new HashMap<>();
-       params.put("SOURCEPATIENTID", "410313422");
-       params.put("SOURCEPATIENTIDTYPE", "IV");
-       params.put("AUTHORORGANIZATION", "45075129-0");
-       System.out.println(createPatientId1(params));
+       // Map<String,Object> params = new HashMap<>();
+       // params.put("SOURCEPATIENTID", "410313422");
+       // params.put("SOURCEPATIENTIDTYPE", "IV");
+       // params.put("AUTHORORGANIZATION", "45075129-0");
+       // System.out.println(createPatientId1(params));
 
 
        // System.out.println(createPrimaryKeyNew1("2106021002OV47045223-9"));
@@ -29,11 +29,11 @@ public class KeyUtils {
        // System.out.println(createVisitID(params));
 
 
-        // Map<String,Object> params = new HashMap<>();
-        // params.put("SourceId", "");
-        // params.put("AuthorOrganization", "");
-        // params.put("RecordClassifying", "TransfusionRecord");
-        // System.out.println(generateDcId(params));
+        Map<String,Object> params = new HashMap<>();
+        params.put("SourceId", "1042463565");
+        params.put("AuthorOrganization", "79649060-6");
+        params.put("RecordClassifying", "MedPrescription");
+        System.out.println(generateDcId(params));
     }
 
     public static String createPatientId1(Map<String, Object> head) {
