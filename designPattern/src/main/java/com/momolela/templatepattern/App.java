@@ -1,6 +1,9 @@
 package com.momolela.templatepattern;
 
-public class TemplatePatternDemo {
+/**
+ * @author sunzj
+ */
+public class App {
     public static void main(String[] args) {
 
         Game game = new Cricket();

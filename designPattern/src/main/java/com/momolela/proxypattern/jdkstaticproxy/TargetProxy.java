@@ -9,10 +9,14 @@ package com.momolela.proxypattern.jdkstaticproxy;
  */
 public class TargetProxy implements HelloService {
 
-    // 拥有目标接口的引用
-    private HelloService helloService;
+    /**
+     * 拥有目标接口的引用
+     */
+    private final HelloService helloService;
 
-    // 提供形参为目标接口的构造函数，并赋值给引用
+    /**
+     * 提供形参为目标接口的构造函数，并赋值给引用
+     */
     public TargetProxy(HelloService helloService) {
         this.helloService = helloService;
     }

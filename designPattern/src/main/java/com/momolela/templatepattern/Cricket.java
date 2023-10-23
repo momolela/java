@@ -1,5 +1,8 @@
 package com.momolela.templatepattern;
 
+/**
+ * @author sunzj
+ */
 public class Cricket extends Game {
 
     @Override

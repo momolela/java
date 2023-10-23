@@ -1,5 +1,8 @@
 package com.momolela.templatepattern;
 
+/**
+ * @author sunzj
+ */
 public class Football extends Game {
 
     @Override
