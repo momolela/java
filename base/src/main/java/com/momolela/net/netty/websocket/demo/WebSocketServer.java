@@ -1,4 +1,4 @@
-package com.momolela.net.netty.websocket;
+package com.momolela.net.netty.websocket.demo;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 /**
  * 利用 Netty 开启一个 websocket 的服务
  * ws://localhost:8899/ws
+ * @author sunzj
  */
 public class WebSocketServer {
     public static void main(String[] args) throws InterruptedException {
