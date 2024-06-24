@@ -32,9 +32,11 @@ public class BigDecimal01Base {
         // 打印 100.000
         System.out.println(new BigDecimal("100.000").toString());
         // 打印 1E+2，stripTrailingZeros() 用于去除末尾多余的 0
-        System.out.println(new BigDecimal(new BigDecimal("100.000").stripTrailingZeros().toString()));
+        System.out.println(new BigDecimal("100.000").stripTrailingZeros().toString());
         // 打印 100
-        System.out.println(new BigDecimal(new BigDecimal("100.000").stripTrailingZeros().toPlainString()));
+        System.out.println(new BigDecimal("100.000").stripTrailingZeros().toPlainString());
+        // 打印 0.9
+        System.out.println((new BigDecimal("100.000").subtract(new BigDecimal("99.1"))).stripTrailingZeros().toPlainString());
 
         // 问题 4：BigDecimal 的类型在数据库中也需要存储为 decimal 的字段类型不然也会丢失精度
 
