@@ -14,7 +14,7 @@ public interface HelloService {
      * @param name 名字
      * @return
      */
-    String sayHello(String name);
+    // String sayHello(String name);
 
     /**
      * 发送 email
@@ -23,7 +23,7 @@ public interface HelloService {
      * @param contentStr 内容
      * @return
      */
-    Boolean sendEmail(String to, String contentStr);
+    // Boolean sendEmail(String to, String contentStr);
 
     /**
      * 发送短信
@@ -32,7 +32,7 @@ public interface HelloService {
      * @param contentStr 内容
      * @return
      */
-    Boolean sendSmsByAliYun(String to, String contentStr);
+    // Boolean sendSmsByAliYun(String to, String contentStr);
 
     /**
      * 发送短信
@@ -51,7 +51,7 @@ public interface HelloService {
      * @param tmpAuthCode  tmpAuthCode
      * @return
      */
-    Object getDingDingUserInfoByTmpAuthCode(String accessKey, String accessSecret, String tmpAuthCode);
+    // Object getDingDingUserInfoByTmpAuthCode(String accessKey, String accessSecret, String tmpAuthCode);
 
 
     /**
@@ -68,7 +68,7 @@ public interface HelloService {
      * @param singleUrl    singleUrl
      * @return
      */
-    JSONResponseBean sendDing(String accessKey, String accessSecret, String agentIdStr, String userIds, String msgType, String title, String content, String singleTitle, String singleUrl);
+    // JSONResponseBean sendDing(String accessKey, String accessSecret, String agentIdStr, String userIds, String msgType, String title, String content, String singleTitle, String singleUrl);
 
     /**
      * 发送钉钉代办消息
@@ -81,5 +81,5 @@ public interface HelloService {
      * @param taskUrl      taskUrl
      * @return
      */
-    JSONResponseBean sendDingTask(String accessKey, String accessSecret, String sendUserId, String userIds, String title, String desc, String taskUrl);
+    // JSONResponseBean sendDingTask(String accessKey, String accessSecret, String sendUserId, String userIds, String title, String desc, String taskUrl);
 }

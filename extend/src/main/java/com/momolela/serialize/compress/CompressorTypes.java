@@ -1,5 +1,8 @@
 package com.momolela.serialize.compress;
 
+/**
+ * @author sunzj
+ */
 public class CompressorTypes {
     public static final byte NONE = 0;
     public static final byte GZIP = 1;

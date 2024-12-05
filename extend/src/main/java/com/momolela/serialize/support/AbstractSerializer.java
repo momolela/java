@@ -6,6 +6,9 @@ import com.momolela.serialize.compress.CompressStreamFactory;
 
 import java.io.*;
 
+/**
+ * @author sunzj
+ */
 public abstract class AbstractSerializer implements Serializer {
     @Override
     public void write(OutputStream out, Object bean, byte compressType) {

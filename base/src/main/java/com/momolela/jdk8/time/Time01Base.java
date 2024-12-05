@@ -153,7 +153,7 @@ public class Time01Base {
         System.out.println("new Date() 转换为 LocalDateTime 的结果是：" + dateTime2);
 
 
-        int tableCount = Integer.parseInt("10");
+        int tableCount = Integer.parseInt("5");
         DateTimeFormatter patten = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate now = LocalDate.now();
         // 最早的日期
@@ -166,5 +166,10 @@ public class Time01Base {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss Z");
         LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
         System.out.println(dateTime); // output: 2023-03-21T16:00:47
+
+
+
+        DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        System.out.println(FORMAT.format(LocalDate.now()).split(" ")[0]);
     }
 }

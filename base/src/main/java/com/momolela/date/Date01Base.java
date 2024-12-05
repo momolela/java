@@ -2,9 +2,12 @@ package com.momolela.date;
 
 import org.apache.http.client.utils.DateUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
@@ -12,7 +15,54 @@ import java.util.Date;
 
 public class Date01Base {
 
+    private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+
+    public static String getLocalTime(String strTime) {
+        if (strTime == null) {
+            return null;
+        }
+
+        if (strTime.length() < 23 && strTime.length() > 19) {
+            strTime = strTime.substring(0, 19) + ".000";
+            strTime = strTime.substring(0, 23).replace('T', ' ');
+        } else {
+            strTime = strTime.substring(0, 23).replace('T', ' ');
+        }
+
+        ZonedDateTime zdt = ZonedDateTime.parse(strTime, FORMAT.withZone(ZoneOffset.UTC));
+        ZonedDateTime localTime = zdt.withZoneSameInstant(ZoneOffset.ofHours(8));
+
+        return FORMAT.format(localTime);
+
+        // if (strTime == null) {
+        //     return null;
+        // }
+        //
+        // Calendar now = Calendar.getInstance();
+        // Date date = null;
+        // try {
+        //     if (strTime.length() < 23 && strTime.length() > 19) {
+        //         strTime = strTime.substring(0, 19) + ".000";
+        //         strTime = strTime.substring(0, 23).replace('T', ' ');
+        //     } else {
+        //         strTime = strTime.substring(0, 23).replace('T', ' ');
+        //     }
+        //     date = FORMAT.parse(strTime);
+        //
+        //     now.setTime(date);
+        //     if (!false) {
+        //         now.set(10, now.get(10) + 8);
+        //     }
+        // } catch (ParseException e) {
+        //     return FORMAT.format(new Date());
+        // }
+        // return FORMAT.format(now.getTime());
+    }
+
+
     public static void main(String[] args) {
+
+        System.out.println(getLocalTime("2024-07-22 02:15:46.744"));
 
         Date date = new Date();
         System.out.println(date);

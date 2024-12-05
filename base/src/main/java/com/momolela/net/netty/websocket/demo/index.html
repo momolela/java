@@ -11,7 +11,7 @@
     // 如果浏览器支持 WebSocket
     if (window.WebSocket) {
         // 参数就是与服务器连接的地址
-        socket = new WebSocket("ws://10.1.0.179:8899/ws");
+        socket = new WebSocket("ws://10.17.4.67:30251/ws");
         // 客户端收到服务器消息的时候就会执行这个回调方法
         socket.onmessage = function (event) {
             let ta = document.getElementById("responseText");

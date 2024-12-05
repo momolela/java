@@ -16,13 +16,14 @@ import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream
 import org.xerial.snappy.SnappyInputStream;
 import org.xerial.snappy.SnappyOutputStream;
 
+/**
+ * @author sunzj
+ */
 public class CompressStreamFactory {
 
     public static InputStream buildInputStream(InputStream is, byte type) {
         try {
             switch (type) {
-                case 0:
-                    return is;
                 case 1:
                     return new GZIPInputStream(is);
                 case 2:
@@ -44,8 +45,6 @@ public class CompressStreamFactory {
     public static OutputStream buildOutputStream(OutputStream os, byte type) {
         try {
             switch (type) {
-                case 0:
-                    return os;
                 case 1:
                     return new GZIPOutputStream(os);
                 case 2:

@@ -8,7 +8,7 @@ import java.util.Enumeration;
 
 public class Server {
     public static void main(String[] args) {
-        String ipAddress = getIpAddress();
+        String ipAddress = "10.1.0.179";
         String wsUrl = "http://" + ipAddress + ":9000/hello";
         Endpoint.publish(wsUrl, new HelloServiceImpl());
         System.out.println("webservice 服务启动了，地址是：" + wsUrl + "?wsdl");

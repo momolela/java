@@ -12,7 +12,7 @@ import java.util.List;
 public class App {
     public static void main(String[] args) throws Exception {
         // 要发布的 WS 地址
-        String url = "http://127.0.0.1:8888/customWS";
+        String url = "http://10.1.0.179:8888/customWS";
 
         // 初始化 WS 信息
         WebServiceInfo webServiceInfo = new WebServiceInfo("namespace", "serviceName", "portName");

@@ -3,6 +3,7 @@ package com.momolela.io.file;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class IOFile02Methods {
 
@@ -62,6 +63,10 @@ public class IOFile02Methods {
         File f6 = new File("test-file-create.txt");
         File f7 = new File("test-file-create-cut.txt");
         System.out.println(f6.renameTo(f7)); // 名称修改，有剪切的意思
+
+
+        // HashMap<long, int> map = new HashMap<>(10);
+        // map.put(112l, 120);
     }
 
     public static void listRoots() {

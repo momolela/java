@@ -7,7 +7,7 @@ public class Singleton {
     private Singleton() {
     }
 
-    public static enum SingletonEnum {
+    public enum SingletonEnum {
         /**
          * 唯一实例
          */
