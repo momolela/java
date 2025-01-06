@@ -5,6 +5,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
 
+/**
+ * @author sunzj
+ */
 public class ArithmeticCalculatorLoggingProxy {
 
     private ArithmeticCalculator target;
@@ -36,6 +39,4 @@ public class ArithmeticCalculatorLoggingProxy {
         arithmeticCalculatorProxy = (ArithmeticCalculator) Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
         return arithmeticCalculatorProxy;
     }
-
-
 }

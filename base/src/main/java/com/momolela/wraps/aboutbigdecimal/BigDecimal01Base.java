@@ -35,6 +35,7 @@ public class BigDecimal01Base {
         System.out.println(new BigDecimal("100.000").stripTrailingZeros().toString());
         // 打印 100
         System.out.println(new BigDecimal("100.000").stripTrailingZeros().toPlainString());
+        System.out.println(new BigDecimal("100.000").intValue());
         // 打印 0.9
         System.out.println((new BigDecimal("100.000").subtract(new BigDecimal("99.1"))).stripTrailingZeros().toPlainString());
 

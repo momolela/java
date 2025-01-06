@@ -23,7 +23,8 @@ public class HttpProxy06SendFormParam {
     public static void main(String[] args) throws Exception {
         CloseableHttpClient client = HttpClients.createDefault();
 
-        String url = "http://10.0.38.178:9526/momolela/printName/"; // 这里必须要带上最后的 /，不然 post 请求失败
+        // 这里必须要带上最后的 /，不然 post 请求失败
+        String url = "http://10.0.38.178:9526/momolela/printName/";
         HttpPost httpPost = new HttpPost(url);
 
         // 发送表单类型的 post 请求，Content-Type 默认是：application/x-www-form-urlencoded
